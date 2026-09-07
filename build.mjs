@@ -7,6 +7,11 @@ for (const f of ["favicon.svg", "favicon.ico", "favicon.png", "apple-touch-icon.
   try { copyFileSync(f, `dist/${f}`); } catch {}
 }
 
+// BIMI brand logo — served at https://merkats.app/bimi/logo.svg, pointed at by
+// the `default._bimi.merkats.app` DNS TXT record. SVG Tiny Portable/Secure.
+mkdirSync("dist/bimi", { recursive: true });
+try { copyFileSync("bimi-logo.svg", "dist/bimi/logo.svg"); } catch {}
+
 // The animated Merkat — a DOM port of src/components/MeerkatLogo.js
 // (blink + chew + a blade of grass grazed down out of the mouth and regrown).
 const MEERKAT_CSS = `
@@ -169,4 +174,4 @@ for (const [file, out] of [["STORY.md", "story.html"], ["PRIVACY.md", "privacy.h
     body: `<a class="back" href="/">&larr; Merkats</a>\n${md(file)}\n<p class="tail"><a href="/story.html">Our Story</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; support@merkats.app</p>`,
   }));
 }
-console.log("built dist/: index.html, story.html, privacy.html, terms.html");
+console.log("built dist/: index.html, story.html, privacy.html, terms.html, bimi/logo.svg");
