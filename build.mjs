@@ -151,15 +151,16 @@ writeFileSync("dist/index.html", shell({
   <h1>Merkats</h1>
   <p>Plan shared meals, split the chores, and see who's in for dinner &mdash; for houses, halls and friend groups that cook together.</p>
   ${appStoreBadge}
-  <div class="links"><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a></div>
+  <div class="links"><a href="/story">Our Story</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a></div>
   <p class="mail">Questions or abuse reports: <a href="mailto:support@merkats.app">support@merkats.app</a></p>
 </div>`,
 }));
 
-for (const [file, out] of [["PRIVACY.md", "privacy.html"], ["TERMS.md", "terms.html"]]) {
+const DOC_TITLES = { "STORY.md": "Merkats — Our Story", "PRIVACY.md": "Merkats — Privacy Policy", "TERMS.md": "Merkats — Terms of Service" };
+for (const [file, out] of [["STORY.md", "story.html"], ["PRIVACY.md", "privacy.html"], ["TERMS.md", "terms.html"]]) {
   writeFileSync(`dist/${out}`, shell({
-    title: file === "PRIVACY.md" ? "Merkats — Privacy Policy" : "Merkats — Terms of Service",
-    body: `<a class="back" href="/">&larr; Merkats</a>\n${md(file)}\n<p class="tail"><a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a> &middot; support@merkats.app</p>`,
+    title: DOC_TITLES[file],
+    body: `<a class="back" href="/">&larr; Merkats</a>\n${md(file)}\n<p class="tail"><a href="/story">Our Story</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a> &middot; support@merkats.app</p>`,
   }));
 }
-console.log("built dist/: index.html, privacy.html, terms.html");
+console.log("built dist/: index.html, story.html, privacy.html, terms.html");
