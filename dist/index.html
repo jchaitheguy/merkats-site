@@ -19,8 +19,8 @@
 .mk>div,.mk>.anim{position:absolute}
 @keyframes mk-blink{0%,90%,100%{height:0}93%,96%{height:calc(var(--s)*0.15)}}
 @keyframes mk-chew{0%,100%{height:calc(var(--s)*0.03)}50%{height:calc(var(--s)*0.08)}}
-@keyframes mk-graze{0%{height:calc(var(--s)*0.44)}55%{height:calc(var(--s)*0.05)}56%{height:calc(var(--s)*0.44)}100%{height:calc(var(--s)*0.44)}}
-@keyframes mk-leaf{0%,53%{opacity:1}54%,55%{opacity:0}57%,100%{opacity:1}}
+@keyframes mk-graze{0%,100%{height:calc(var(--s)*0.06)}6%,42%{height:calc(var(--s)*0.44)}48%{height:calc(var(--s)*0.06)}}
+@keyframes mk-leaf{0%,4%,46%,100%{opacity:0}8%,40%{opacity:1}}
 @media (prefers-reduced-motion:reduce){.mk .anim{animation:none!important}}
 
   .page { max-width: 680px; margin: 0 auto; padding: 40px 22px 72px; }
@@ -72,8 +72,8 @@
   <div style="left:38%;top:64%;width:24%;height:9%;overflow:hidden">
     <div style="position:absolute;left:0;top:-70%;width:100%;height:200%;border-radius:50%;border:calc(var(--s)*0.02) solid #7A5A3A"></div>
   </div>
-  <div class="anim" style="left:46%;top:72%;width:9%;height:calc(var(--s)*0.03);border-radius:45%;background:#6B3F26;animation:mk-chew 4s infinite"></div>
-  <div class="anim" style="left:47.5%;bottom:30%;width:5%;height:calc(var(--s)*0.44);animation:mk-graze 4s infinite;overflow:visible">
+  <div class="anim" style="left:46%;top:72%;width:9%;height:calc(var(--s)*0.03);border-radius:45%;background:#6B3F26;animation:mk-chew 0.6s infinite"></div>
+  <div class="anim" style="left:47.5%;bottom:30%;width:5%;height:calc(var(--s)*0.06);animation:mk-graze 4s ease-in-out infinite;overflow:visible">
     <div style="position:absolute;bottom:0;width:100%;height:100%;border-radius:40%;background:#7FBF63"></div>
     <div class="anim" style="position:absolute;top:-6%;left:80%;width:130%;height:60%;border-radius:50%;background:#8FCE70;transform:rotate(28deg);animation:mk-leaf 4s infinite"></div>
   </div>
