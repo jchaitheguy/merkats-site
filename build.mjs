@@ -12,7 +12,17 @@ for (const f of ["favicon.svg", "favicon.ico", "favicon.png", "apple-touch-icon.
 const MEERKAT_CSS = `
 .mk{position:relative;--s:120px}
 .mk>div,.mk>.anim{position:absolute}
-@keyframes mk-blink{0%,90%,100%{height:0}93%,96%{height:calc(var(--s)*0.15)}}
+@keyframes mk-blink{0%,90%,100%{height:0}93%,96%{height:calc(var(--s)*0.22)}}
+/* eyes glance around on the same 4.2s clock as the eating cycle -- both
+   pupils move together (translate is screen-space, so it works the same
+   whether the eye is positioned from the left or the right) */
+@keyframes mk-look{
+  0%,14.29%,85.71%,100%{transform:translate(0,0)}
+  28.57%{transform:translate(calc(var(--s)*-0.018),calc(var(--s)*-0.012))}
+  42.86%{transform:translate(calc(var(--s)*0.021),calc(var(--s)*0.006))}
+  57.14%{transform:translate(0,calc(var(--s)*0.021))}
+  71.43%{transform:translate(calc(var(--s)*-0.018),calc(var(--s)*0.012))}
+}
 /* jaw grinds in a small circle, panda-with-bamboo style, instead of a plain vertical open/close */
 @keyframes mk-chew{
   0%,100%{transform:translate(calc(var(--s)*0.018),0) scale(1.05)}
@@ -32,15 +42,15 @@ const MEERKAT_CSS = `
    a beat of nothing before it springs back up. Ends fully at 0: no nub. */
 @keyframes mk-graze{
   0%{height:0}
-  14.29%{height:calc(var(--s)*0.3)}
-  28.57%{height:calc(var(--s)*0.3);animation-timing-function:ease-in}
-  42.86%{height:calc(var(--s)*0.225);animation-timing-function:ease-in}
-  57.14%{height:calc(var(--s)*0.15);animation-timing-function:ease-in}
-  71.43%{height:calc(var(--s)*0.075);animation-timing-function:ease-in}
+  14.29%{height:calc(var(--s)*0.22)}
+  28.57%{height:calc(var(--s)*0.22);animation-timing-function:ease-in}
+  42.86%{height:calc(var(--s)*0.165);animation-timing-function:ease-in}
+  57.14%{height:calc(var(--s)*0.11);animation-timing-function:ease-in}
+  71.43%{height:calc(var(--s)*0.055);animation-timing-function:ease-in}
   85.71%,100%{height:0}
 }
 /* the stick sways with the same rhythm as the jaw, like it's being tugged as it's chewed */
-@keyframes mk-stick{0%,100%{transform:rotate(10deg)}25%{transform:rotate(14deg)}50%{transform:rotate(10deg)}75%{transform:rotate(6deg)}}
+@keyframes mk-stick{0%,100%{transform:rotate(6deg)}25%{transform:rotate(9deg)}50%{transform:rotate(6deg)}75%{transform:rotate(3deg)}}
 @keyframes mk-leaf{0%,12%,63%,100%{opacity:0}20%,57%{opacity:1}}
 @media (prefers-reduced-motion:reduce){.mk .anim{animation:none!important}}
 `;
@@ -48,25 +58,35 @@ const MEERKAT_CSS = `
 const meerkat = (size) => `<div class="mk" style="--s:${size}px;width:${size}px;height:${size * 1.12}px" aria-label="Merkat">
   <div style="left:2%;top:20%;width:26%;height:26%;border-radius:50%;background:#B98A50"></div>
   <div style="right:2%;top:20%;width:26%;height:26%;border-radius:50%;background:#B98A50"></div>
-  <div style="left:9%;top:16%;width:82%;height:72%;border-radius:44%;background:#D2A56B"></div>
-  <div style="left:30%;top:50%;width:40%;height:36%;border-radius:50%;background:#F0DCBB"></div>
-  <div style="left:19%;top:30%;width:24%;height:20%;border-radius:50%;background:#5E4327;opacity:.26"></div>
-  <div style="right:19%;top:30%;width:24%;height:20%;border-radius:50%;background:#5E4327;opacity:.26"></div>
-  <div style="left:24%;top:31%;width:18%;height:18%;border-radius:50%;background:#fff"></div>
-  <div style="right:24%;top:31%;width:18%;height:18%;border-radius:50%;background:#fff"></div>
-  <div style="left:29%;top:35%;width:10%;height:10%;border-radius:50%;background:#241A0E"></div>
-  <div style="right:29%;top:35%;width:10%;height:10%;border-radius:50%;background:#241A0E"></div>
-  <div style="left:31%;top:36%;width:3.5%;height:3.5%;border-radius:50%;background:#fff"></div>
-  <div style="right:35%;top:36%;width:3.5%;height:3.5%;border-radius:50%;background:#fff"></div>
-  <div class="anim" style="left:24%;top:31%;width:18%;height:0;border-radius:40%;background:#D2A56B;animation:mk-blink 4.6s infinite"></div>
-  <div class="anim" style="right:24%;top:31%;width:18%;height:0;border-radius:40%;background:#D2A56B;animation:mk-blink 4.6s infinite"></div>
-  <div style="left:16%;top:52%;width:14%;height:10%;border-radius:50%;background:#E79C93;opacity:.55"></div>
-  <div style="right:16%;top:52%;width:14%;height:10%;border-radius:50%;background:#E79C93;opacity:.55"></div>
-  <div style="left:44%;top:55%;width:12%;height:9%;border-radius:50%;background:#3B2A1B"></div>
-  <div style="left:38%;top:64%;width:24%;height:9%;overflow:hidden">
+  <div style="left:9%;top:16%;width:82%;height:80%;border-radius:44%;background:#D2A56B"></div>
+  <div style="left:29%;top:48%;width:42%;height:40%;border-radius:50% 50% 42% 42%;background:#F0DCBB"></div>
+  <!-- whiskers, thin lines fanning out from beside the muzzle -->
+  <div style="left:4%;top:57%;width:22%;height:calc(var(--s)*0.007);border-radius:2px;background:#8A7256;opacity:.6;transform:rotate(-8deg)"></div>
+  <div style="left:2%;top:62%;width:23%;height:calc(var(--s)*0.007);border-radius:2px;background:#8A7256;opacity:.6"></div>
+  <div style="left:4%;top:67%;width:22%;height:calc(var(--s)*0.007);border-radius:2px;background:#8A7256;opacity:.6;transform:rotate(8deg)"></div>
+  <div style="right:4%;top:57%;width:22%;height:calc(var(--s)*0.007);border-radius:2px;background:#8A7256;opacity:.6;transform:rotate(8deg)"></div>
+  <div style="right:2%;top:62%;width:23%;height:calc(var(--s)*0.007);border-radius:2px;background:#8A7256;opacity:.6"></div>
+  <div style="right:4%;top:67%;width:22%;height:calc(var(--s)*0.007);border-radius:2px;background:#8A7256;opacity:.6;transform:rotate(-8deg)"></div>
+  <!-- big, glossy, cute-anime eyes: pupil nearly fills the white, two highlights -->
+  <div style="left:13%;top:22%;width:30%;height:28%;border-radius:50%;background:#5E4327;opacity:.2"></div>
+  <div style="right:13%;top:22%;width:30%;height:28%;border-radius:50%;background:#5E4327;opacity:.2"></div>
+  <div style="left:16%;top:23%;width:26%;height:26%;border-radius:50%;background:#fff"></div>
+  <div style="right:16%;top:23%;width:26%;height:26%;border-radius:50%;background:#fff"></div>
+  <div class="anim" style="left:19%;top:26%;width:20%;height:20%;border-radius:50%;background:#241A0E;animation:mk-look 4.2s ease-in-out infinite"></div>
+  <div class="anim" style="right:19%;top:26%;width:20%;height:20%;border-radius:50%;background:#241A0E;animation:mk-look 4.2s ease-in-out infinite"></div>
+  <div class="anim" style="left:21.5%;top:27.5%;width:6%;height:6%;border-radius:50%;background:#fff;animation:mk-look 4.2s ease-in-out infinite"></div>
+  <div class="anim" style="right:21.5%;top:27.5%;width:6%;height:6%;border-radius:50%;background:#fff;animation:mk-look 4.2s ease-in-out infinite"></div>
+  <div class="anim" style="left:31%;top:38%;width:2.5%;height:2.5%;border-radius:50%;background:#fff;opacity:.9;animation:mk-look 4.2s ease-in-out infinite"></div>
+  <div class="anim" style="right:31%;top:38%;width:2.5%;height:2.5%;border-radius:50%;background:#fff;opacity:.9;animation:mk-look 4.2s ease-in-out infinite"></div>
+  <div class="anim" style="left:16%;top:23%;width:26%;height:0;border-radius:40%;background:#D2A56B;animation:mk-blink 4.6s infinite"></div>
+  <div class="anim" style="right:16%;top:23%;width:26%;height:0;border-radius:40%;background:#D2A56B;animation:mk-blink 4.6s infinite"></div>
+  <div style="left:16%;top:56%;width:14%;height:10%;border-radius:50%;background:#E79C93;opacity:.55"></div>
+  <div style="right:16%;top:56%;width:14%;height:10%;border-radius:50%;background:#E79C93;opacity:.55"></div>
+  <div style="left:44%;top:58%;width:12%;height:9%;border-radius:50%;background:#3B2A1B"></div>
+  <div class="anim" style="left:38%;top:67%;width:24%;height:9%;overflow:hidden;animation:mk-chew 0.6s ease-in-out infinite">
     <div style="position:absolute;left:0;top:-70%;width:100%;height:200%;border-radius:50%;border:calc(var(--s)*0.02) solid #7A5A3A"></div>
   </div>
-  <div class="anim" style="left:46%;top:72%;width:9%;height:calc(var(--s)*0.05);border-radius:45%;background:#6B3F26;animation:mk-chew 0.6s ease-in-out infinite"></div>
+  <div class="anim" style="left:46%;top:75%;width:9%;height:calc(var(--s)*0.05);border-radius:45%;background:#6B3F26;animation:mk-chew 0.6s ease-in-out infinite"></div>
   <div class="anim" style="left:50%;bottom:30%;width:5%;height:0;transform-origin:bottom;animation:mk-graze 4.2s ease-in-out infinite,mk-stick 0.6s ease-in-out infinite;overflow:visible">
     <div style="position:absolute;bottom:0;width:100%;height:100%;border-radius:40%;background:#7FBF63"></div>
     <div class="anim" style="position:absolute;top:-6%;left:80%;width:130%;height:60%;border-radius:50%;background:#8FCE70;transform:rotate(28deg);animation:mk-leaf 4.2s infinite"></div>
