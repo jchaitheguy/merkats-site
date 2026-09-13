@@ -1,11 +1,15 @@
 # Our story
 
-Merkats started with a house that already knew how to do this.
+Merkats started with a community that already knew how to do this.
 
-At Princeton, a few of us lived in [Scully Cooperative](https://scullycoop.vercel.app/) — a co-op where nobody eats alone by accident. Someone's always cooking, someone's always on dishes, and the whole house runs on a shared rhythm that a spreadsheet and a chore wheel on the wall somehow held together. It worked because everyone could see it: who was cooking tonight, who owed a chore, who was actually going to show up for dinner.
+At Princeton, joining a cooking co-op — a group of students who cook for one another — was one of the dining options available to upperclass students. At the [Scully Cooperative](https://scullycoop.vercel.app/), a community of about 35 members, people were always cooking, chatting, and cleaning together. But one of the hardest parts of running a co-op was keeping track of everything.
 
-When we left, we missed the house — but mostly we missed *that*. The visibility. The gentle social pressure of a chore wheel everyone could see. The fact that dinner was a thing the house did together, not something everyone figured out alone in their own kitchen.
+Members sometimes ordered duplicate groceries, cook shifts made too much food, and people forgot to sign off on chores. In 2025, we tried to solve these problems with a Discord bot and custom commands like `/setRecurringPoll` and `/setMenu`, but it was not a friendly interface for everyone.
 
-Merkats is our attempt to carry that rhythm anywhere people cook together — a house, a hall, a co-op, a friend group who decided to start splitting groceries. Schedule the meals, split the chores, see who's actually in for dinner. The wheel on the wall, just in your pocket.
+That experience inspired Merkats: an easy-to-use app that brings these tracking tools together. Although our [iOS app](https://apps.apple.com/us/app/merkats/id6806871553) is now available on the App Store, we are still early in development. We hope to work with new cooking groups to learn what they need and build features that make cooking together easier.
+
+If you are interested in learning more or sharing feedback, [schedule a 30-minute conversation with us](https://calendly.com/jchai8985/30min). We would love to hear how your group cooks together.
+
+**Our vision is to create community through communal cooking and provide the platform to make this possible.**
 
 — The Merkats team
