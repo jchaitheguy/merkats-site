@@ -26,12 +26,17 @@ const MEERKAT_CSS = `
 }
 /* 4.2s = exactly 7 chew beats (mk-chew/mk-stick run on a 0.6s loop), so every
    phase lands on a beat: quick regrow (beat 0), a held moment (beat 1), then
-   4 discrete bites -- one per beat, via steps() -- and a beat of nothing
-   before it springs back up. Ends fully at 0: no leftover nub. */
+   4 beats of continuous eating -- each beat eases in (barely moves at first,
+   then slides in quicker right at the end of that rotation) so it reads as
+   one smooth retraction paced by the chewing, not a series of jumps -- then
+   a beat of nothing before it springs back up. Ends fully at 0: no nub. */
 @keyframes mk-graze{
   0%{height:0}
   14.29%{height:calc(var(--s)*0.3)}
-  28.57%{height:calc(var(--s)*0.3);animation-timing-function:steps(4,jump-end)}
+  28.57%{height:calc(var(--s)*0.3);animation-timing-function:ease-in}
+  42.86%{height:calc(var(--s)*0.225);animation-timing-function:ease-in}
+  57.14%{height:calc(var(--s)*0.15);animation-timing-function:ease-in}
+  71.43%{height:calc(var(--s)*0.075);animation-timing-function:ease-in}
   85.71%,100%{height:0}
 }
 /* the stick sways with the same rhythm as the jaw, like it's being tugged as it's chewed */
