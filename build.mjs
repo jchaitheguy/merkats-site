@@ -97,14 +97,10 @@ ${hero ? body : `<div class="page doc">${body}</div>`}
 
 const md = (f) => marked.parse(readFileSync(`${APP}/${f}`, "utf8"));
 
-// TODO once the app is live on the App Store:
-//  1. Set APP_STORE_URL to the product page: https://apps.apple.com/app/id<APP_ID>
-//  2. Download the official black badge SVG from
-//     https://developer.apple.com/app-store/marketing/guidelines/ (or
-//     https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us)
-//     -> save as ./appstore-badge.svg (build.mjs copies ./assets it finds)
-//  3. It renders automatically below the tagline. Don't recolor/reshape the badge.
-const APP_STORE_URL = ""; // e.g. "https://apps.apple.com/us/app/merkats/id0000000000"
+// Live on the App Store as of 2026-09-12. Badge is Apple's own official
+// artwork (tools.applemediaservices.com badge generator) — don't recolor
+// or reshape it, per their marketing guidelines.
+const APP_STORE_URL = "https://apps.apple.com/us/app/merkats/id6806871553";
 const appStoreBadge = APP_STORE_URL
   ? `<a class="badge" href="${APP_STORE_URL}" target="_blank" rel="noopener"
        aria-label="Download Merkats on the App Store"><img src="/appstore-badge.svg"
