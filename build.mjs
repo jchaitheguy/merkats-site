@@ -56,27 +56,29 @@ const MEERKAT_CSS = `
 `;
 
 const meerkat = (size) => `<div class="mk" style="--s:${size}px;width:${size}px;height:${size * 1.12}px" aria-label="Merkat">
-  <!-- baby-meerkat coloring: pale grey fur, dark ear tips + bold dark eye
-       patches, pink nose -- modeled after a real meerkat pup reference -->
-  <div style="left:2%;top:20%;width:26%;height:26%;border-radius:50%;background:#332A22"></div>
-  <div style="right:2%;top:20%;width:26%;height:26%;border-radius:50%;background:#332A22"></div>
-  <div style="left:9%;top:16%;width:82%;height:80%;border-radius:44%;background:#DAD3C2"></div>
-  <div style="left:29%;top:48%;width:42%;height:40%;border-radius:50% 50% 42% 42%;background:#E7E0D0"></div>
-  <!-- bold dark patches surround the eyes, like a real meerkat's mask -->
-  <div style="left:16%;top:23%;width:26%;height:24%;border-radius:50%;background:#2E2620;opacity:.85"></div>
-  <div style="right:16%;top:23%;width:26%;height:24%;border-radius:50%;background:#2E2620;opacity:.85"></div>
-  <div style="left:21%;top:26%;width:19%;height:18%;border-radius:50%;background:#fff"></div>
-  <div style="right:21%;top:26%;width:19%;height:18%;border-radius:50%;background:#fff"></div>
-  <div class="anim" style="left:22.5%;top:27.5%;width:16%;height:16%;border-radius:50%;background:#1A1310;animation:mk-look 7s ease-in-out infinite"></div>
-  <div class="anim" style="right:22.5%;top:27.5%;width:16%;height:16%;border-radius:50%;background:#1A1310;animation:mk-look 7s ease-in-out infinite"></div>
-  <div class="anim" style="left:24%;top:28.5%;width:5%;height:5%;border-radius:50%;background:#fff;animation:mk-look 7s ease-in-out infinite"></div>
-  <div class="anim" style="right:24%;top:28.5%;width:5%;height:5%;border-radius:50%;background:#fff;animation:mk-look 7s ease-in-out infinite"></div>
-  <div class="anim" style="left:32%;top:37%;width:2%;height:2%;border-radius:50%;background:#fff;opacity:.9;animation:mk-look 7s ease-in-out infinite"></div>
-  <div class="anim" style="right:32%;top:37%;width:2%;height:2%;border-radius:50%;background:#fff;opacity:.9;animation:mk-look 7s ease-in-out infinite"></div>
-  <div class="anim" style="left:21%;top:26%;width:19%;height:0;border-radius:40%;background:#2E2620;animation:mk-blink 4.6s infinite"></div>
-  <div class="anim" style="right:21%;top:26%;width:19%;height:0;border-radius:40%;background:#2E2620;animation:mk-blink 4.6s infinite"></div>
-  <div style="left:45%;top:57%;width:10%;height:8%;border-radius:50%;background:#C98F92"></div>
-  <div class="anim" style="left:46%;top:74%;width:8%;height:calc(var(--s)*0.045);border-radius:45%;background:#6B4A3E;animation:mk-chew 1s ease-in-out infinite"></div>
+  <!-- back to the same colors/geometry as favicon.svg -- only the motion
+       (blink, eye-look, circular chew, grass-eating) is new from there -->
+  <div style="left:2%;top:20%;width:26%;height:26%;border-radius:50%;background:#B98A50"></div>
+  <div style="right:2%;top:20%;width:26%;height:26%;border-radius:50%;background:#B98A50"></div>
+  <div style="left:9%;top:16%;width:82%;height:72%;border-radius:44%;background:#D2A56B"></div>
+  <div style="left:30%;top:50%;width:40%;height:36%;border-radius:50%;background:#F0DCBB"></div>
+  <div style="left:19%;top:30%;width:24%;height:20%;border-radius:50%;background:#5E4327;opacity:.26"></div>
+  <div style="right:19%;top:30%;width:24%;height:20%;border-radius:50%;background:#5E4327;opacity:.26"></div>
+  <div style="left:24%;top:31%;width:18%;height:18%;border-radius:50%;background:#fff"></div>
+  <div style="right:24%;top:31%;width:18%;height:18%;border-radius:50%;background:#fff"></div>
+  <div class="anim" style="left:29%;top:35%;width:10%;height:10%;border-radius:50%;background:#241A0E;animation:mk-look 7s ease-in-out infinite"></div>
+  <div class="anim" style="right:29%;top:35%;width:10%;height:10%;border-radius:50%;background:#241A0E;animation:mk-look 7s ease-in-out infinite"></div>
+  <div class="anim" style="left:31%;top:36%;width:3.5%;height:3.5%;border-radius:50%;background:#fff;animation:mk-look 7s ease-in-out infinite"></div>
+  <div class="anim" style="right:35%;top:36%;width:3.5%;height:3.5%;border-radius:50%;background:#fff;animation:mk-look 7s ease-in-out infinite"></div>
+  <div class="anim" style="left:24%;top:31%;width:18%;height:0;border-radius:40%;background:#D2A56B;animation:mk-blink 4.6s infinite"></div>
+  <div class="anim" style="right:24%;top:31%;width:18%;height:0;border-radius:40%;background:#D2A56B;animation:mk-blink 4.6s infinite"></div>
+  <div style="left:16%;top:52%;width:14%;height:10%;border-radius:50%;background:#E79C93;opacity:.55"></div>
+  <div style="right:16%;top:52%;width:14%;height:10%;border-radius:50%;background:#E79C93;opacity:.55"></div>
+  <div style="left:44%;top:55%;width:12%;height:9%;border-radius:50%;background:#3B2A1B"></div>
+  <div class="anim" style="left:38%;top:64%;width:24%;height:9%;overflow:hidden;animation:mk-chew 1s ease-in-out infinite">
+    <div style="position:absolute;left:0;top:-70%;width:100%;height:200%;border-radius:50%;border:calc(var(--s)*0.02) solid #7A5A3A"></div>
+  </div>
+  <div class="anim" style="left:46%;top:72%;width:9%;height:calc(var(--s)*0.05);border-radius:45%;background:#6B3F26;animation:mk-chew 1s ease-in-out infinite"></div>
   <div class="anim" style="left:50%;bottom:30%;width:5%;height:0;transform-origin:bottom;animation:mk-graze 7s ease-in-out infinite,mk-stick 1s ease-in-out infinite;overflow:visible">
     <div style="position:absolute;bottom:0;width:100%;height:100%;border-radius:40%;background:#7FBF63"></div>
     <div class="anim" style="position:absolute;top:-6%;left:80%;width:130%;height:60%;border-radius:50%;background:#8FCE70;transform:rotate(28deg);animation:mk-leaf 7s infinite"></div>
@@ -151,7 +153,7 @@ writeFileSync("dist/index.html", shell({
   <h1>Merkats</h1>
   <p>Plan shared meals, split the chores, and see who's in for dinner &mdash; for houses, halls and friend groups that cook together.</p>
   ${appStoreBadge}
-  <div class="links"><a href="/story">Our Story</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a></div>
+  <div class="links"><a href="/story.html">Our Story</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
   <p class="mail">Questions or abuse reports: <a href="mailto:support@merkats.app">support@merkats.app</a></p>
 </div>`,
 }));
@@ -160,7 +162,7 @@ const DOC_TITLES = { "STORY.md": "Merkats — Our Story", "PRIVACY.md": "Merkats
 for (const [file, out] of [["STORY.md", "story.html"], ["PRIVACY.md", "privacy.html"], ["TERMS.md", "terms.html"]]) {
   writeFileSync(`dist/${out}`, shell({
     title: DOC_TITLES[file],
-    body: `<a class="back" href="/">&larr; Merkats</a>\n${md(file)}\n<p class="tail"><a href="/story">Our Story</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a> &middot; support@merkats.app</p>`,
+    body: `<a class="back" href="/">&larr; Merkats</a>\n${md(file)}\n<p class="tail"><a href="/story.html">Our Story</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; support@merkats.app</p>`,
   }));
 }
 console.log("built dist/: index.html, story.html, privacy.html, terms.html");
