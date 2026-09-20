@@ -89,7 +89,7 @@ const shell = ({ title, body, hero = false }) => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -105,7 +105,11 @@ const shell = ({ title, body, hero = false }) => `<!doctype html>
   .page { max-width: 680px; margin: 0 auto; padding: 40px 22px 72px; }
   /* home */
   .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center;
-    justify-content: center; text-align: center; gap: 14px; }
+    justify-content: center; text-align: center; gap: 14px;
+    padding-left: max(24px, env(safe-area-inset-left));
+    padding-right: max(24px, env(safe-area-inset-right)); }
+  @media (max-width: 600px) { .hero { padding-left: max(28px, env(safe-area-inset-left));
+    padding-right: max(28px, env(safe-area-inset-right)); } }
   .hero h1 { font-size: 34px; font-weight: 800; margin: 6px 0 0; letter-spacing: -0.5px; }
   .hero p { color: #5b6b62; max-width: 30rem; margin: 0; }
   .hero .links { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
