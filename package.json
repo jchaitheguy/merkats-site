@@ -2,6 +2,15 @@
   "name": "merkats-site",
   "private": true,
   "type": "module",
-  "scripts": { "build": "node build.mjs" },
-  "dependencies": { "marked": "^16.0.0" }
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.119.0",
+    "leaflet": "^1.9.4",
+    "marked": "^16.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
 }

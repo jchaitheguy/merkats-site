@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="alternate icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/leaflet.css"><link rel="stylesheet" href="/assets/app.css">
+<script>window.MERKATS = {"t":{"demoBanner":"演示模式：这里的内容都不是真实的，数据也不会离开此浏览器。","tabs":{"map":"地图","meals":"我的餐食","host":"主理人工具","settings":"设置","admin":"审核"},"common":{"save":"保存","cancel":"取消","back":"返回","loading":"加载中…","remove":"移除","yes":"是","no":"否","next":"下一步","done":"完成","skip":"跳过"},"auth":{"identifier":"用户名或电子邮箱","roleQ":"你打算如何使用 Merkats？","member":"会员","memberDesc":"加入你附近的备餐活动。","host":"主理人","hostDesc":"开放你的厨房举办活动并获得报酬。","checkEmail":"请查看电子邮件确认账户，然后登录。"},"map":{"title":"寻找你附近的厨房","nearMe":"使用我的位置","empty":"目前还没有通过审核的厨房。","locating":"正在定位…","denied":"无法获取你的位置，但你仍可浏览地图。","miles":"英里","approx":"地图上的位置是大致位置。付款后你会收到确切地址。"},"location":{"upcoming":"即将举行的餐食","noMeals":"这里暂时没有即将举行的餐食。","seatsLeft":"个名额","full":"已满","commit":"确认并付款","committed":"你已加入","yours":"这是你的活动。","switchToJoin":"请在设置中切换为会员账户后加入。","address":"地址","directions":"到达方式","perPerson":"每人","notFound":"找不到该厨房。"},"meals":{"title":"我的餐食","empty":"你还没有加入任何活动。","find":"寻找厨房","leave":"退出活动","leaveConfirm":"确定退出此活动吗？如果距离活动开始超过 24 小时，你将获得全额退款。","status":{"pending":"等待付款","paid":"已付款","completed":"已完成","cancelled":"已取消","refunded":"已退款"},"paidToast":"你已加入！我们已收到付款。","cancelledToast":"付款已取消，你没有被扣款。","leftToast":"你已退出活动。"},"host":{"title":"主理人工具","register":"登记你的厨房","registerHelp":"请介绍你的空间。我们会审核每个厨房，通过后它将显示在地图上。","name":"厨房名称","description":"空间介绍","address":"地址","addressHelp":"开始输入，然后从列表中选择你的地址。","pickAddress":"请从列表中选择地址。","directions":"给会员的到达方式（选填）","capacityNote":"只有已付款的会员才能看到确切地址和到达方式。","submit":"提交审核","resubmit":"编辑并重新提交","submitted":"已提交！我们会尽快审核你的厨房。","another":"添加其他厨房","status":{"pending":"等待审核","approved":"已通过","rejected":"未通过"},"note":"Merkats 的备注","sessions":"活动","noSessions":"还没有活动。","newSession":"新建活动","approveFirst":"厨房通过审核后即可添加活动。","payoutsTitle":"获得报酬","payoutsNeeded":"请设置收款，以便会员为你的活动付款。","payoutsReady":"收款已设置。","setup":"设置收款","dashboard":"查看收款"},"session":{"title":"活动名称","menu":"菜单","when":"日期和时间","duration":"时长（分钟）","price":"每位会员的价格（美元）","seats":"名额","payoutHint":"扣除 {pct}% 的 Merkats 费用后，每位会员你可收到 {host}。这笔钱应足以支付食材和场地。","created":"活动已创建。","saved":"已保存。","manage":"管理","cancelSession":"取消活动","cancelConfirm":"确定取消此活动吗？所有已付款的人都将获得全额退款。","cancelled":"已取消","cancelledToast":"活动已取消。","notFound":"找不到该活动。","locked":"已有人加入，因此日期和价格已锁定。"},"groceries":{"title":"食材","item":"项目","qty":"数量","estimate":"预估（美元）","actual":"实际（美元）","bought":"已购买","add":"添加项目","empty":"还没有食材。","total":"合计"},"roster":{"title":"会员","name":"姓名","status":"状态","paid":"已付清","committed":"已确认","empty":"还没有人加入。","summary":"{seats} 个名额中已有 {paid} 人付款","payout":"目前你的收入"},"settings":{"title":"设置","account":"账户","role":"账户类型","roleSaved":"账户类型已更新。","tutorial":"重新查看教程","signOut":"退出登录"},"admin":{"title":"厨房审核","empty":"没有待审核的内容。","approve":"通过","reject":"拒绝","notePrompt":"给主理人的备注（选填）","approved":"已通过，现已显示在地图上。","rejected":"已拒绝。","submittedBy":"提交人"},"tutorial":{"step":"第 {n} 步，共 {total} 步","member":[{"route":"map","target":"map","title":"寻找附近的厨房","body":"通过审核的 Merkats 厨房会显示在这张地图上。使用你的位置查看附近有哪些厨房。"},{"route":"map","target":"list","title":"选择一位主理人","body":"选择一个厨房，查看即将举行的餐食、菜单、价格和剩余名额。"},{"route":"meals","target":"meals","title":"你的餐食","body":"确认并付款后，你的活动和确切地址会显示在这里。"},{"route":"settings","target":"role","title":"你的账户","body":"有厨房可以分享吗？你可以随时在这里切换为主理人账户。"}],"host":[{"route":"host","target":"location","title":"登记你的厨房","body":"从这里开始。介绍你的空间，我们会进行审核。通过后它将显示在地图上。"},{"route":"host","target":"payouts","title":"获得报酬","body":"请设置收款，以便会员为你的活动付款。每次活动结束后我们会向你付款。"},{"route":"host","target":"hostTab","title":"组织你的活动","body":"通过审核后，你可以在这里创建活动并设定菜单和价格。每个活动都有食材表，以及显示谁已确认和付款的会员名单。"},{"route":"map","target":"map","title":"会员如何看到你","body":"会员在这张地图上找到你。在他们付款前，你的位置只显示大致范围。"},{"route":"settings","target":"role","title":"你的账户","body":"你可以在这里切换账户类型或重新查看本教程。"}]},"errors":{"try_again":"出了点问题，请重试。","username_taken":"该用户名已被使用。","email_taken":"该邮箱已有账户，请直接登录。","no_account":"找不到使用该用户名的账户。","bad_login":"用户名或密码不正确。","email_unconfirmed":"请先确认你的电子邮箱。","weak_password":"你的密码强度不够。","session_full":"此活动刚刚满员。","session_closed":"此活动已停止接受新会员。","session_unavailable":"此活动不可用。","already_committed":"你已加入此活动。","own_session":"你不能加入自己的活动。","host_not_ready":"这位主理人仍在设置收款，暂时无法付款。","too_late_to_cancel":"距离活动开始已不足 24 小时，无法取消。","cannot_cancel":"无法取消。","not_a_host":"请先切换为主理人账户。","not_allowed":"你没有执行此操作的权限。","session_has_commitments":"已有人加入，因此日期和价格已锁定。","seats_below_committed":"名额不能少于已加入的会员人数。","address_unavailable":"地址搜索暂时不可用。"}},"auth":{"create":"创建账户","welcome":"欢迎回来"},"lang":"zh","prefix":"/zh","feePercent":10,"config":{"url":"https://ythzbmfhkeavfpzyrurt.supabase.co","anonKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0aHpibWZoa2VhdmZwenlydXJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc0MjczOTIsImV4cCI6MjEwMzAwMzM5Mn0.ivzblycmdJFEtpQ7ILsBuYHQ0DB3hB6BKz8guS3Oz_M"}};</script>
+<script src="/assets/app.js" defer></script>
+<title>Merkats — 登录</title>
+<link rel="alternate" hreflang="en" href="https://merkats.app/login.html">
+<link rel="alternate" hreflang="es" href="https://merkats.app/es/login.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://merkats.app/zh/login.html">
+<link rel="alternate" hreflang="x-default" href="https://merkats.app/login.html">
+
+<style>
+  /* Self-hosted so visitors make no request to a third party. Regular weight
+     only, so browsers shouldn't fake a bold. */
+  @font-face { font-family: "IM Fell Great Primer"; src: url("/fonts/IMFellGreatPrimer_400Regular.ttf") format("truetype"); font-style: normal; font-display: swap; }
+  :root { color-scheme: light; }
+  /* The typeface has no Chinese glyphs, so Chinese uses a matching serif. */
+  html[lang^="zh"] body { font-family: "IM Fell Great Primer", "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", SimSun, Georgia, serif; }
+  html[lang^="zh"] .q h2 { max-width: 12em; line-height: 1.25; }
+  .notice { font-size: 18px; color: #6E7D71; border-left: 3px solid #C77D7D; padding-left: 12px; margin: 0 0 22px; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #E5EEE4; color: #33403A;
+    font: 21px/1.55 "IM Fell Great Primer", Georgia, "Times New Roman", serif; font-synthesis: none;
+    -webkit-font-smoothing: antialiased; }
+  a { color: #A85F5F; }
+  
+.mk{position:relative;--s:120px}
+.mk>div,.mk>.anim{position:absolute}
+@keyframes mk-blink{0%,90%,100%{height:0}93%,96%{height:calc(var(--s)*0.15)}}
+/* eyes glance around on the same 7s clock as the eating cycle -- both
+   pupils move together (translate is screen-space, so it works the same
+   whether the eye is positioned from the left or the right) */
+@keyframes mk-look{
+  0%,14.29%,85.71%,100%{transform:translate(0,0)}
+  28.57%{transform:translate(calc(var(--s)*-0.018),calc(var(--s)*-0.012))}
+  42.86%{transform:translate(calc(var(--s)*0.021),calc(var(--s)*0.006))}
+  57.14%{transform:translate(0,calc(var(--s)*0.021))}
+  71.43%{transform:translate(calc(var(--s)*-0.018),calc(var(--s)*0.012))}
+}
+/* jaw grinds in a small circle, panda-with-bamboo style, instead of a plain vertical open/close */
+@keyframes mk-chew{
+  0%,100%{transform:translate(calc(var(--s)*0.018),0) scale(1.05)}
+  12.5%{transform:translate(calc(var(--s)*0.013),calc(var(--s)*0.013)) scale(1.15)}
+  25%{transform:translate(0,calc(var(--s)*0.018)) scale(1.2)}
+  37.5%{transform:translate(calc(var(--s)*-0.013),calc(var(--s)*0.013)) scale(1.1)}
+  50%{transform:translate(calc(var(--s)*-0.018),0) scale(1)}
+  62.5%{transform:translate(calc(var(--s)*-0.013),calc(var(--s)*-0.013)) scale(0.9)}
+  75%{transform:translate(0,calc(var(--s)*-0.018)) scale(0.85)}
+  87.5%{transform:translate(calc(var(--s)*0.013),calc(var(--s)*-0.013)) scale(0.95)}
+}
+/* 7s = exactly 7 chew beats (mk-chew/mk-stick run on a 1s loop), so every
+   phase lands on a beat: quick regrow (beat 0), a held moment (beat 1), then
+   4 beats of continuous eating -- each beat eases in (barely moves at first,
+   then slides in quicker right at the end of that rotation) so it reads as
+   one smooth retraction paced by the chewing, not a series of jumps -- then
+   a beat of nothing before it springs back up. Ends fully at 0: no nub. */
+@keyframes mk-graze{
+  0%{height:0}
+  14.29%{height:calc(var(--s)*0.22)}
+  28.57%{height:calc(var(--s)*0.22);animation-timing-function:ease-in}
+  42.86%{height:calc(var(--s)*0.165);animation-timing-function:ease-in}
+  57.14%{height:calc(var(--s)*0.11);animation-timing-function:ease-in}
+  71.43%{height:calc(var(--s)*0.055);animation-timing-function:ease-in}
+  85.71%,100%{height:0}
+}
+/* the stick sways with the same rhythm as the jaw, like it's being tugged as it's chewed */
+@keyframes mk-stick{0%,100%{transform:rotate(6deg)}25%{transform:rotate(9deg)}50%{transform:rotate(6deg)}75%{transform:rotate(3deg)}}
+@keyframes mk-leaf{0%,12%,63%,100%{opacity:0}20%,57%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.mk .anim{animation:none!important}}
+
+  .page { max-width: 780px; margin: 0 auto; padding: 108px 22px 72px; }
+  /* footer */
+  .footer { background: #DCE8DB; border-top: 1px solid rgba(110,125,113,.25); padding: 44px max(24px, env(safe-area-inset-left)) 26px;
+    font-size: 19px; scroll-snap-align: end; }
+  .footer .cols, .footer .legal { max-width: 1040px; margin: 0 auto; }
+  .footer .cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .footer h4 { font-size: 21px; font-weight: 400; color: #33403A; margin: 0 0 12px; }
+  .footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+  .footer a { color: #4d5c54; text-decoration: none; }
+  .footer a:hover { color: #33403A; text-decoration: underline; }
+  .footer .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; margin-top: 32px; padding-top: 18px;
+    border-top: 1px solid rgba(110,125,113,.25); font-size: 17px; color: #6E7D71; }
+  .footer .store-badge { display: block; max-width: 1040px; margin: 26px auto 0; }
+  .footer .store-badge img { display: block; height: 46px; width: auto; }
+  .footer .legal { align-items: center; }
+  .footer .prefs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+  .footer select { font: inherit; color: #4d5c54; border: 1px solid rgba(110,125,113,.45); border-radius: 9px; cursor: pointer;
+    padding: 6px 34px 6px 14px; appearance: none; -webkit-appearance: none;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%234d5c54' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 13px center; }
+  .footer .social { display: flex; padding: 4px; color: #4d5c54; }
+  .footer .social:hover { color: #33403A; }
+  #host, .help { scroll-margin-top: 130px; }
+  .help { background: #fff; border-radius: 14px; padding: 18px 20px; margin-top: 14px; box-shadow: 0 1px 3px rgba(51,64,58,.08); }
+  .doc .help h2 { margin: 0 0 4px; font-size: 26px; }
+  .help p { margin: 0 0 12px; }
+  .help .cta { display: inline-block; background: #C77D7D; color: #fff; text-decoration: none; padding: 9px 16px; border-radius: 10px; }
+  .help .cta:hover { background: #b56c6c; }
+  .help-mail { margin-top: 18px; text-align: center; font-size: 18px; }
+  @media (max-width: 640px) { .footer .cols { grid-template-columns: 1fr; gap: 0; }
+    .footer .cols > div { padding: 18px 0; border-bottom: 1px solid rgba(110,125,113,.25); } .footer .cols > div:first-child { padding-top: 0; }
+    .footer .cols > div:last-child { border-bottom: 0; } .footer .legal { margin-top: 6px; } }
+  /* top nav */
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10; display: flex; align-items: center;
+    justify-content: space-between; padding: 12px max(24px, env(safe-area-inset-left));
+    background: rgba(229,238,228,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(110,125,113,.15); }
+  .nav nav { display: contents; }
+  .nav .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: #33403A; font-size: 28px; line-height: 1.2; font-weight: 700; font-synthesis: weight; }
+  .nav nav a { color: #4d5c54; text-decoration: none; font-size: 20px; padding: 6px 12px; border-radius: 9px; white-space: nowrap; }
+  .nav nav a:hover, .nav nav a[aria-current] { background: rgba(110,125,113,.14); color: #33403A; }
+  .nav nav a.login { background: #C77D7D; color: #fff; }
+  .nav nav a.login:hover { background: #b56c6c; }
+  /* Phones: name on its own row, then the links spread across the next. */
+  @media (max-width: 760px) {
+    .nav { flex-wrap: wrap; gap: 4px 0; padding: 8px 12px; }
+    .nav .brand { flex: 0 0 100%; justify-content: center; font-size: 24px; }
+    .nav .brand img { width: 32px; height: 32px; }
+    .nav nav a { font-size: 15px; padding: 5px 7px; }
+    .page { padding-top: 118px !important; }
+    .q { padding-top: 118px !important; }
+  }
+  /* Very narrow phones can wrap the links onto a second row. */
+  @media (max-width: 340px) { .page, .q { padding-top: 150px !important; } }
+  /* home: one question per screen */
+  html.snap { scroll-snap-type: y mandatory; }
+  .q { position: relative; min-height: 100vh; min-height: 100svh; scroll-snap-align: start; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; gap: 16px;
+    padding: 90px max(28px, env(safe-area-inset-left)) 60px; }
+  .q:nth-child(even) { background: #DCE8DB; }
+  .q h2 { font-size: clamp(30px, 6vw, 52px); line-height: 1.12;
+    margin: 0; max-width: 16ch; }
+  .q p { font-size: clamp(21px, 2.6vw, 26px); color: #5b6b62; max-width: 32rem; margin: 0; }
+  .q .cta { background: #C77D7D; color: #fff; text-decoration: none; padding: 12px 22px;
+    border-radius: 12px; }
+  .q .badge img { display: block; height: 52px; width: auto; }
+  .hint { position: absolute; bottom: 26px; left: 0; right: 0; color: #6E7D71;
+    font-size: 17px; animation: bob 2s ease-in-out infinite; }
+  @keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(6px) } }
+  .reveal > * { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in > * { opacity: 1; transform: none; }
+  .reveal.in > *:nth-child(2) { transition-delay: .12s } .reveal.in > *:nth-child(3) { transition-delay: .24s }
+  .reveal.in > *:nth-child(4) { transition-delay: .36s } .reveal.in > *:nth-child(5) { transition-delay: .48s }
+  @media (prefers-reduced-motion: reduce) { .reveal > * { opacity: 1; transform: none; transition: none; } .hint { animation: none; } }
+  /* home: line drawings that sketch themselves when a section comes into view */
+  .sk { height: clamp(170px, 32vh, 300px); width: auto; max-width: 100%; fill: none; stroke: #044836; stroke-width: 3.5;
+    stroke-linecap: round; stroke-linejoin: round; filter: url(#sk-rough); overflow: visible; }
+  .sk .accent { stroke: #C77D7D; }
+  .sk path { stroke-dasharray: 1 1; stroke-dashoffset: 1; opacity: 0; }
+  .in .sk path { animation: sk-draw var(--t) ease-in-out var(--d) forwards; }
+  @keyframes sk-draw { from { opacity: 1; stroke-dashoffset: 1; } to { opacity: 1; stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { .sk path { opacity: 1; stroke-dashoffset: 0; } .in .sk path { animation: none; } }
+  .sk-logo { filter: none; }
+  .sk image { opacity: 0; }
+  .in .sk image { animation: sk-fade var(--t) linear var(--d) forwards; }
+  @keyframes sk-fade { to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .sk image { opacity: 1; } .in .sk image { animation: none; } }
+  .q .actions { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 14px; }
+  /* how it works */
+  .doc ol { padding-left: 1.3em; margin: 24px 0 0; display: grid; gap: 14px; }
+  .doc ol li { margin: 0 0 12px; padding: 14px 18px; background: #fff; border-radius: 14px; box-shadow: 0 1px 3px rgba(51,64,58,.08); }
+  .doc ol strong { display: block; font-size: 24px; margin-bottom: 2px; color: #33403A; }
+  /* story photos */
+  .doc figure { margin: 22px 0; }
+  .doc figure img, .photos img { display: block; width: 100%; border-radius: 14px; }
+  .doc figcaption { font-size: 17px; color: #6E7D71; margin-top: 6px; text-align: center; }
+  .photos { display: grid; gap: 10px; margin: 22px 0; }
+  .photos.two { grid-template-columns: 1fr 1fr; } .photos.three { grid-template-columns: repeat(3, 1fr); }
+  .photos img { height: 100%; object-fit: cover; } .photos.two img { aspect-ratio: 4/5; } .photos.three img { aspect-ratio: 1; }
+  /* login */
+  .auth { text-align: center; }
+  .doc .auth h1 { font-size: clamp(44px, 9vw, 64px); line-height: 1.08; margin: 10px 0 0; }
+  .auth form { display: grid; gap: 12px; max-width: 400px; margin: 24px auto 0; text-align: left; background: #fff;
+    border-radius: 14px; padding: 18px; box-shadow: 0 1px 3px rgba(51,64,58,.08); }
+  .auth form[hidden] { display: none; }
+    .auth .req { color: #A85F5F; }
+  .auth .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .auth .fine { font-size: 16px; line-height: 1.45; color: #6E7D71; margin: 0; }
+  .auth .fine a { color: #A85F5F; }
+  .auth label { font-size: 17px; color: #4d5c54; display: grid; gap: 5px; }
+  .auth input { font: inherit; padding: 12px 14px; border-radius: 12px; border: 1px solid #c4d4c8;
+    background: #fff; color: #33403A; }
+  .auth input:focus { outline: 2px solid #C77D7D; outline-offset: 1px; border-color: transparent; }
+  .auth button { font: inherit; padding: 12px; border: 0; border-radius: 12px;
+    background: #C77D7D; color: #fff; cursor: pointer; }
+  .auth button:hover { background: #b56c6c; }
+  .auth button.outline { background: transparent; color: #A85F5F; box-shadow: inset 0 0 0 1.5px #C77D7D; }
+  .auth button.outline:hover { background: #f7ecec; }
+  .auth .note { font-size: 17px; color: #6E7D71; text-align: center; margin: 0; }
+  .auth .note:empty { display: none; }
+  /* home */
+  .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center; gap: 14px;
+    padding-left: max(24px, env(safe-area-inset-left));
+    padding-right: max(24px, env(safe-area-inset-right)); }
+  @media (max-width: 600px) { .hero { padding-left: max(28px, env(safe-area-inset-left));
+    padding-right: max(28px, env(safe-area-inset-right)); } }
+  .hero h1 { font-size: 34px; margin: 6px 0 0; }
+  .hero p { color: #5b6b62; max-width: 30rem; margin: 0; }
+  .hero .links { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+  .hero .links a { background: #C77D7D; color: #fff; text-decoration: none;
+    padding: 11px 20px; border-radius: 12px; }
+  .hero .mail { color: #6E7D71; font-size: 14px; }
+  .hero .badge { display: inline-block; margin-top: 6px; }
+  .hero .badge img { display: block; height: 52px; width: auto; }
+  /* legal docs — no card, plain on the ground */
+  .doc h1 { font-size: 44px; line-height: 1.15; margin: 0 0 8px; }
+  .doc h2 { font-size: 30px; line-height: 1.2; margin: 30px 0 8px; }
+  .doc h3 { font-size: 24px; margin: 22px 0 6px; }
+  .doc p, .doc li { color: #3d4a44; }
+  .doc em { color: #6E7D71; font-style: normal; font-size: 18px; }
+  .doc hr { border: none; border-top: 1px solid #cdddd2; margin: 26px 0; }
+  .doc code { background: #dce8de; padding: 1px 5px; border-radius: 4px; font-size: 90%; }
+  .back { display: inline-block; color: #6E7D71; text-decoration: none;
+    font-size: 14px; margin-bottom: 22px; }
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/zh/"><img src="/images/logo.png" alt="" width="40" height="40">merkats</a>
+  <nav><a href="/zh/story.html">我们的故事</a><a href="/zh/how-it-works.html">运作方式</a><a href="/zh/privacy.html">隐私</a>
+  <a class="login" href="/zh/login.html" aria-current="page">登录</a></nav>
+</header>
+<div class="page doc"><div class="auth">
+  <h1 id="auth-title">欢迎回来</h1>
+  <form id="signin">
+    <label><span>用户名或电子邮箱 <span class="req">*</span></span><input name="username" placeholder="用户名" autocomplete="username" autocapitalize="none" required></label>
+    <label><span>密码 <span class="req">*</span></span><input name="password" type="password" placeholder="密码" autocomplete="current-password" required></label>
+    <p class="note" role="status"></p>
+    <div class="row"><button type="submit">登录</button><button type="button" class="outline" id="to-signup">注册</button></div>
+  </form>
+  <form id="signup" hidden>
+    <fieldset><legend>你打算如何使用 Merkats？</legend><label class="role-option"><input type="radio" name="role" value="member" checked><span><strong>会员</strong><small class="muted">加入你附近的备餐活动。</small></span></label><label class="role-option"><input type="radio" name="role" value="host"><span><strong>主理人</strong><small class="muted">开放你的厨房举办活动并获得报酬。</small></span></label></fieldset>
+    <label><span>全名 <span class="req">*</span></span><input name="name" placeholder="全名" autocomplete="name" required></label>
+    <label><span>用户名（必须唯一） <span class="req">*</span></span><input name="username" placeholder="用户名" autocomplete="username" autocapitalize="none" required></label>
+    <label><span>电子邮箱 <span class="req">*</span></span><input name="email" type="email" placeholder="电子邮箱" autocomplete="email" autocapitalize="none" required></label>
+    <label><span>密码 <span class="req">*</span></span><input name="password" type="password" placeholder="密码（至少 6 个字符）" autocomplete="new-password" minlength="6" required></label>
+    <p class="fine">登录后，你可以在个人资料中添加照片、简介和饮食信息。这些都是选填内容。</p>
+    <p class="fine">创建账户即表示你同意我们的<a href="/zh/terms.html">服务条款</a>和<a href="/zh/privacy.html">隐私政策</a>，其中包括对辱骂性或不当内容的零容忍政策。</p>
+    <p class="note" role="status"></p>
+    <div class="row"><button type="button" class="outline" id="to-signin">返回登录</button><button type="submit">创建账户</button></div>
+  </form>
+</div></div>
+<footer class="footer">
+  <div class="cols"><div><h4>支持</h4><ul><li><a href="/zh/support.html">联系我们</a></li><li><a href="/zh/support.html#feature">功能建议</a></li><li><a href="/zh/terms.html">使用条款</a></li><li><a href="/zh/privacy.html">隐私政策</a></li></ul></div><div><h4>产品</h4><ul><li><a href="/zh/how-it-works.html#host">成为主理人</a></li><li><a href="https://apps.apple.com/us/app/merkats/id6806871553" target="_blank" rel="noopener">下载 iOS 应用</a></li><li><a href="/zh/how-it-works.html">运作方式</a></li><li><a href="/zh/login.html#signup">成为会员</a></li></ul></div></div>
+  <a class="store-badge" href="https://apps.apple.com/us/app/merkats/id6806871553" target="_blank" rel="noopener" aria-label="在 App Store 下载 Merkats"><img src="/appstore-badge.svg" alt="在 App Store 下载 Merkats" width="150" height="50"></a>
+  <div class="legal"><span>&copy; 2026 Merkats</span>
+    <div class="prefs"><select id="pref-language" aria-label="语言"><option value="en">English</option><option value="es">Español</option><option value="zh" selected>中文</option></select><select id="pref-currency" aria-label="货币"><option value="usd" selected>$ USD</option><option value="eur">€ EUR</option><option value="gbp">£ GBP</option></select>
+      <a class="social" href="https://www.instagram.com/merka_ts/" target="_blank" rel="noopener" aria-label="Merkats 的 Instagram"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a></div>
+  </div>
+</footer>
+<script>
+(() => {
+  const save = (key, value) => { try { localStorage.setItem("merkats." + key, value); } catch {} };
+  // Language: go to the same page in the chosen language.
+  const language = document.getElementById("pref-language");
+  language.addEventListener("change", () => {
+    save("language", language.value);
+    let rest = location.pathname;
+    for (const code of ["es","zh"]) {
+      if (rest === "/" + code || rest.startsWith("/" + code + "/")) rest = rest.slice(code.length + 1) || "/";
+    }
+    location.href = (language.value === "en" ? "" : "/" + language.value) + rest + location.hash;
+  });
+  // The back button can restore a changed select; this page's language wins.
+  addEventListener("pageshow", () => { language.value = "zh"; });
+  // Signed in? The header's log-in link becomes a link to your account.
+  try {
+    const signedIn = Object.keys(localStorage).some((k) => k === "merkats.demo.session" || (k.startsWith("sb-") && k.endsWith("-auth-token")));
+    if (signedIn) {
+      const link = document.querySelector(".nav .login");
+      link.textContent = "我的账户";
+      link.href = "/zh/app.html";
+    }
+  } catch {}
+  // Currency: remembered only, since the site doesn't show prices yet.
+  const currency = document.getElementById("pref-currency");
+  try { const v = localStorage.getItem("merkats.currency"); if (v && [...currency.options].some((o) => o.value === v)) currency.value = v; } catch {}
+  currency.addEventListener("change", () => save("currency", currency.value));
+})();
+</script>
+</body>
+</html>

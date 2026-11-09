@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="alternate icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<title>Merkats — Política de privacidad</title>
+<link rel="alternate" hreflang="en" href="https://merkats.app/privacy.html">
+<link rel="alternate" hreflang="es" href="https://merkats.app/es/privacy.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://merkats.app/zh/privacy.html">
+<link rel="alternate" hreflang="x-default" href="https://merkats.app/privacy.html">
+
+<style>
+  /* Self-hosted so visitors make no request to a third party. Regular weight
+     only, so browsers shouldn't fake a bold. */
+  @font-face { font-family: "IM Fell Great Primer"; src: url("/fonts/IMFellGreatPrimer_400Regular.ttf") format("truetype"); font-style: normal; font-display: swap; }
+  :root { color-scheme: light; }
+  /* The typeface has no Chinese glyphs, so Chinese uses a matching serif. */
+  html[lang^="zh"] body { font-family: "IM Fell Great Primer", "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", SimSun, Georgia, serif; }
+  html[lang^="zh"] .q h2 { max-width: 12em; line-height: 1.25; }
+  .notice { font-size: 18px; color: #6E7D71; border-left: 3px solid #C77D7D; padding-left: 12px; margin: 0 0 22px; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #E5EEE4; color: #33403A;
+    font: 21px/1.55 "IM Fell Great Primer", Georgia, "Times New Roman", serif; font-synthesis: none;
+    -webkit-font-smoothing: antialiased; }
+  a { color: #A85F5F; }
+  
+.mk{position:relative;--s:120px}
+.mk>div,.mk>.anim{position:absolute}
+@keyframes mk-blink{0%,90%,100%{height:0}93%,96%{height:calc(var(--s)*0.15)}}
+/* eyes glance around on the same 7s clock as the eating cycle -- both
+   pupils move together (translate is screen-space, so it works the same
+   whether the eye is positioned from the left or the right) */
+@keyframes mk-look{
+  0%,14.29%,85.71%,100%{transform:translate(0,0)}
+  28.57%{transform:translate(calc(var(--s)*-0.018),calc(var(--s)*-0.012))}
+  42.86%{transform:translate(calc(var(--s)*0.021),calc(var(--s)*0.006))}
+  57.14%{transform:translate(0,calc(var(--s)*0.021))}
+  71.43%{transform:translate(calc(var(--s)*-0.018),calc(var(--s)*0.012))}
+}
+/* jaw grinds in a small circle, panda-with-bamboo style, instead of a plain vertical open/close */
+@keyframes mk-chew{
+  0%,100%{transform:translate(calc(var(--s)*0.018),0) scale(1.05)}
+  12.5%{transform:translate(calc(var(--s)*0.013),calc(var(--s)*0.013)) scale(1.15)}
+  25%{transform:translate(0,calc(var(--s)*0.018)) scale(1.2)}
+  37.5%{transform:translate(calc(var(--s)*-0.013),calc(var(--s)*0.013)) scale(1.1)}
+  50%{transform:translate(calc(var(--s)*-0.018),0) scale(1)}
+  62.5%{transform:translate(calc(var(--s)*-0.013),calc(var(--s)*-0.013)) scale(0.9)}
+  75%{transform:translate(0,calc(var(--s)*-0.018)) scale(0.85)}
+  87.5%{transform:translate(calc(var(--s)*0.013),calc(var(--s)*-0.013)) scale(0.95)}
+}
+/* 7s = exactly 7 chew beats (mk-chew/mk-stick run on a 1s loop), so every
+   phase lands on a beat: quick regrow (beat 0), a held moment (beat 1), then
+   4 beats of continuous eating -- each beat eases in (barely moves at first,
+   then slides in quicker right at the end of that rotation) so it reads as
+   one smooth retraction paced by the chewing, not a series of jumps -- then
+   a beat of nothing before it springs back up. Ends fully at 0: no nub. */
+@keyframes mk-graze{
+  0%{height:0}
+  14.29%{height:calc(var(--s)*0.22)}
+  28.57%{height:calc(var(--s)*0.22);animation-timing-function:ease-in}
+  42.86%{height:calc(var(--s)*0.165);animation-timing-function:ease-in}
+  57.14%{height:calc(var(--s)*0.11);animation-timing-function:ease-in}
+  71.43%{height:calc(var(--s)*0.055);animation-timing-function:ease-in}
+  85.71%,100%{height:0}
+}
+/* the stick sways with the same rhythm as the jaw, like it's being tugged as it's chewed */
+@keyframes mk-stick{0%,100%{transform:rotate(6deg)}25%{transform:rotate(9deg)}50%{transform:rotate(6deg)}75%{transform:rotate(3deg)}}
+@keyframes mk-leaf{0%,12%,63%,100%{opacity:0}20%,57%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.mk .anim{animation:none!important}}
+
+  .page { max-width: 780px; margin: 0 auto; padding: 108px 22px 72px; }
+  /* footer */
+  .footer { background: #DCE8DB; border-top: 1px solid rgba(110,125,113,.25); padding: 44px max(24px, env(safe-area-inset-left)) 26px;
+    font-size: 19px; scroll-snap-align: end; }
+  .footer .cols, .footer .legal { max-width: 1040px; margin: 0 auto; }
+  .footer .cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .footer h4 { font-size: 21px; font-weight: 400; color: #33403A; margin: 0 0 12px; }
+  .footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+  .footer a { color: #4d5c54; text-decoration: none; }
+  .footer a:hover { color: #33403A; text-decoration: underline; }
+  .footer .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; margin-top: 32px; padding-top: 18px;
+    border-top: 1px solid rgba(110,125,113,.25); font-size: 17px; color: #6E7D71; }
+  .footer .store-badge { display: block; max-width: 1040px; margin: 26px auto 0; }
+  .footer .store-badge img { display: block; height: 46px; width: auto; }
+  .footer .legal { align-items: center; }
+  .footer .prefs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+  .footer select { font: inherit; color: #4d5c54; border: 1px solid rgba(110,125,113,.45); border-radius: 9px; cursor: pointer;
+    padding: 6px 34px 6px 14px; appearance: none; -webkit-appearance: none;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%234d5c54' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 13px center; }
+  .footer .social { display: flex; padding: 4px; color: #4d5c54; }
+  .footer .social:hover { color: #33403A; }
+  #host, .help { scroll-margin-top: 130px; }
+  .help { background: #fff; border-radius: 14px; padding: 18px 20px; margin-top: 14px; box-shadow: 0 1px 3px rgba(51,64,58,.08); }
+  .doc .help h2 { margin: 0 0 4px; font-size: 26px; }
+  .help p { margin: 0 0 12px; }
+  .help .cta { display: inline-block; background: #C77D7D; color: #fff; text-decoration: none; padding: 9px 16px; border-radius: 10px; }
+  .help .cta:hover { background: #b56c6c; }
+  .help-mail { margin-top: 18px; text-align: center; font-size: 18px; }
+  @media (max-width: 640px) { .footer .cols { grid-template-columns: 1fr; gap: 0; }
+    .footer .cols > div { padding: 18px 0; border-bottom: 1px solid rgba(110,125,113,.25); } .footer .cols > div:first-child { padding-top: 0; }
+    .footer .cols > div:last-child { border-bottom: 0; } .footer .legal { margin-top: 6px; } }
+  /* top nav */
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10; display: flex; align-items: center;
+    justify-content: space-between; padding: 12px max(24px, env(safe-area-inset-left));
+    background: rgba(229,238,228,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(110,125,113,.15); }
+  .nav nav { display: contents; }
+  .nav .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: #33403A; font-size: 28px; line-height: 1.2; font-weight: 700; font-synthesis: weight; }
+  .nav nav a { color: #4d5c54; text-decoration: none; font-size: 20px; padding: 6px 12px; border-radius: 9px; white-space: nowrap; }
+  .nav nav a:hover, .nav nav a[aria-current] { background: rgba(110,125,113,.14); color: #33403A; }
+  .nav nav a.login { background: #C77D7D; color: #fff; }
+  .nav nav a.login:hover { background: #b56c6c; }
+  /* Phones: name on its own row, then the links spread across the next. */
+  @media (max-width: 760px) {
+    .nav { flex-wrap: wrap; gap: 4px 0; padding: 8px 12px; }
+    .nav .brand { flex: 0 0 100%; justify-content: center; font-size: 24px; }
+    .nav .brand img { width: 32px; height: 32px; }
+    .nav nav a { font-size: 15px; padding: 5px 7px; }
+    .page { padding-top: 118px !important; }
+    .q { padding-top: 118px !important; }
+  }
+  /* Very narrow phones can wrap the links onto a second row. */
+  @media (max-width: 340px) { .page, .q { padding-top: 150px !important; } }
+  /* home: one question per screen */
+  html.snap { scroll-snap-type: y mandatory; }
+  .q { position: relative; min-height: 100vh; min-height: 100svh; scroll-snap-align: start; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; gap: 16px;
+    padding: 90px max(28px, env(safe-area-inset-left)) 60px; }
+  .q:nth-child(even) { background: #DCE8DB; }
+  .q h2 { font-size: clamp(30px, 6vw, 52px); line-height: 1.12;
+    margin: 0; max-width: 16ch; }
+  .q p { font-size: clamp(21px, 2.6vw, 26px); color: #5b6b62; max-width: 32rem; margin: 0; }
+  .q .cta { background: #C77D7D; color: #fff; text-decoration: none; padding: 12px 22px;
+    border-radius: 12px; }
+  .q .badge img { display: block; height: 52px; width: auto; }
+  .hint { position: absolute; bottom: 26px; left: 0; right: 0; color: #6E7D71;
+    font-size: 17px; animation: bob 2s ease-in-out infinite; }
+  @keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(6px) } }
+  .reveal > * { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in > * { opacity: 1; transform: none; }
+  .reveal.in > *:nth-child(2) { transition-delay: .12s } .reveal.in > *:nth-child(3) { transition-delay: .24s }
+  .reveal.in > *:nth-child(4) { transition-delay: .36s } .reveal.in > *:nth-child(5) { transition-delay: .48s }
+  @media (prefers-reduced-motion: reduce) { .reveal > * { opacity: 1; transform: none; transition: none; } .hint { animation: none; } }
+  /* home: line drawings that sketch themselves when a section comes into view */
+  .sk { height: clamp(170px, 32vh, 300px); width: auto; max-width: 100%; fill: none; stroke: #044836; stroke-width: 3.5;
+    stroke-linecap: round; stroke-linejoin: round; filter: url(#sk-rough); overflow: visible; }
+  .sk .accent { stroke: #C77D7D; }
+  .sk path { stroke-dasharray: 1 1; stroke-dashoffset: 1; opacity: 0; }
+  .in .sk path { animation: sk-draw var(--t) ease-in-out var(--d) forwards; }
+  @keyframes sk-draw { from { opacity: 1; stroke-dashoffset: 1; } to { opacity: 1; stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { .sk path { opacity: 1; stroke-dashoffset: 0; } .in .sk path { animation: none; } }
+  .sk-logo { filter: none; }
+  .sk image { opacity: 0; }
+  .in .sk image { animation: sk-fade var(--t) linear var(--d) forwards; }
+  @keyframes sk-fade { to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .sk image { opacity: 1; } .in .sk image { animation: none; } }
+  .q .actions { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 14px; }
+  /* how it works */
+  .doc ol { padding-left: 1.3em; margin: 24px 0 0; display: grid; gap: 14px; }
+  .doc ol li { margin: 0 0 12px; padding: 14px 18px; background: #fff; border-radius: 14px; box-shadow: 0 1px 3px rgba(51,64,58,.08); }
+  .doc ol strong { display: block; font-size: 24px; margin-bottom: 2px; color: #33403A; }
+  /* story photos */
+  .doc figure { margin: 22px 0; }
+  .doc figure img, .photos img { display: block; width: 100%; border-radius: 14px; }
+  .doc figcaption { font-size: 17px; color: #6E7D71; margin-top: 6px; text-align: center; }
+  .photos { display: grid; gap: 10px; margin: 22px 0; }
+  .photos.two { grid-template-columns: 1fr 1fr; } .photos.three { grid-template-columns: repeat(3, 1fr); }
+  .photos img { height: 100%; object-fit: cover; } .photos.two img { aspect-ratio: 4/5; } .photos.three img { aspect-ratio: 1; }
+  /* login */
+  .auth { text-align: center; }
+  .doc .auth h1 { font-size: clamp(44px, 9vw, 64px); line-height: 1.08; margin: 10px 0 0; }
+  .auth form { display: grid; gap: 12px; max-width: 400px; margin: 24px auto 0; text-align: left; background: #fff;
+    border-radius: 14px; padding: 18px; box-shadow: 0 1px 3px rgba(51,64,58,.08); }
+  .auth form[hidden] { display: none; }
+    .auth .req { color: #A85F5F; }
+  .auth .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .auth .fine { font-size: 16px; line-height: 1.45; color: #6E7D71; margin: 0; }
+  .auth .fine a { color: #A85F5F; }
+  .auth label { font-size: 17px; color: #4d5c54; display: grid; gap: 5px; }
+  .auth input { font: inherit; padding: 12px 14px; border-radius: 12px; border: 1px solid #c4d4c8;
+    background: #fff; color: #33403A; }
+  .auth input:focus { outline: 2px solid #C77D7D; outline-offset: 1px; border-color: transparent; }
+  .auth button { font: inherit; padding: 12px; border: 0; border-radius: 12px;
+    background: #C77D7D; color: #fff; cursor: pointer; }
+  .auth button:hover { background: #b56c6c; }
+  .auth button.outline { background: transparent; color: #A85F5F; box-shadow: inset 0 0 0 1.5px #C77D7D; }
+  .auth button.outline:hover { background: #f7ecec; }
+  .auth .note { font-size: 17px; color: #6E7D71; text-align: center; margin: 0; }
+  .auth .note:empty { display: none; }
+  /* home */
+  .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center; gap: 14px;
+    padding-left: max(24px, env(safe-area-inset-left));
+    padding-right: max(24px, env(safe-area-inset-right)); }
+  @media (max-width: 600px) { .hero { padding-left: max(28px, env(safe-area-inset-left));
+    padding-right: max(28px, env(safe-area-inset-right)); } }
+  .hero h1 { font-size: 34px; margin: 6px 0 0; }
+  .hero p { color: #5b6b62; max-width: 30rem; margin: 0; }
+  .hero .links { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+  .hero .links a { background: #C77D7D; color: #fff; text-decoration: none;
+    padding: 11px 20px; border-radius: 12px; }
+  .hero .mail { color: #6E7D71; font-size: 14px; }
+  .hero .badge { display: inline-block; margin-top: 6px; }
+  .hero .badge img { display: block; height: 52px; width: auto; }
+  /* legal docs — no card, plain on the ground */
+  .doc h1 { font-size: 44px; line-height: 1.15; margin: 0 0 8px; }
+  .doc h2 { font-size: 30px; line-height: 1.2; margin: 30px 0 8px; }
+  .doc h3 { font-size: 24px; margin: 22px 0 6px; }
+  .doc p, .doc li { color: #3d4a44; }
+  .doc em { color: #6E7D71; font-style: normal; font-size: 18px; }
+  .doc hr { border: none; border-top: 1px solid #cdddd2; margin: 26px 0; }
+  .doc code { background: #dce8de; padding: 1px 5px; border-radius: 4px; font-size: 90%; }
+  .back { display: inline-block; color: #6E7D71; text-decoration: none;
+    font-size: 14px; margin-bottom: 22px; }
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/es/"><img src="/images/logo.png" alt="" width="40" height="40">merkats</a>
+  <nav><a href="/es/story.html">Historia</a><a href="/es/how-it-works.html">Cómo funciona</a><a href="/es/privacy.html" aria-current="page">Privacidad</a>
+  <a class="login" href="/es/login.html">Entrar</a></nav>
+</header>
+<div class="page doc"><p class="notice">Este documento solo está disponible en inglés.</p><div lang="en"><h1>Merkats — Privacy Policy</h1>
+<p><em>Last updated: 2026-09-06</em></p>
+<p>Merkats is a small app for running a shared-cooking community — scheduling
+meals, taking turns on chores, and chatting with your group. This policy
+explains what it stores and why.</p>
+<h2>What we collect</h2>
+<ul>
+<li><strong>Account:</strong> a username, an email address, and a password (stored only as a
+secure hash by our authentication provider — we never see it). You may also
+add a separate recovery email.</li>
+<li><strong>Profile you provide:</strong> display name, avatar, short bio, dietary
+restrictions, and any &quot;fun facts&quot; you choose to add.</li>
+<li><strong>Community activity:</strong> the communities you create or join, meal times,
+chores, your meal-poll responses, the two chore proof photos you submit each
+week, dish photos and recipe links, group and direct messages, message
+reactions, friend connections, appreciation notes (&quot;kudos&quot;), and the list of
+users you have blocked.</li>
+<li><strong>Safety reports:</strong> if you report a message or profile, we store the report,
+a snapshot of the reported content, and your account id.</li>
+<li><strong>Photos:</strong> profile pictures, community pictures, dish photos, and chore
+proof photos that you take or select.</li>
+<li><strong>Usage events:</strong> a record of key actions (e.g. &quot;joined a community&quot;,
+&quot;voted on a meal&quot;, &quot;submitted a chore&quot;) used to understand how the app is
+used and improve it.</li>
+</ul>
+<p>We do <strong>not</strong> collect your contacts, precise location, advertising
+identifiers, or browsing activity, and we do <strong>not</strong> track you across other
+apps or websites.</p>
+<h2>How it&#39;s stored</h2>
+<ul>
+<li>Data is stored in our backend database (Supabase, hosted in the region
+chosen for the project) and a media bucket for photos.</li>
+<li>Your recovery email is stored <strong>encrypted</strong>; it is not readable by other
+users or in normal database access.</li>
+<li>The app also keeps a copy on your device so it works offline.</li>
+</ul>
+<h2>Who can see it</h2>
+<ul>
+<li><strong>Other members of your communities</strong> can see your username, display name,
+avatar, bio, fun facts, dietary restrictions, kudos about you, and the
+messages and content you post in that community. Admins of a community can
+additionally see chore submissions and manage members.</li>
+<li><strong>Direct messages</strong> are visible to you and the recipient.</li>
+<li>The app developer can access aggregate usage data and, for support and
+safety, the underlying records. Encrypted fields (recovery email) are only
+accessible to the developer.</li>
+<li>We do not sell your data or share it with advertisers.</li>
+</ul>
+<h2>Chore proof photos</h2>
+<p>Chore proof photos are automatically deleted at the end of each weekly cycle
+(or when the next cycle begins). They are not kept indefinitely.</p>
+<h2>Safety and moderation</h2>
+<p>Merkats has zero tolerance for abusive, harassing, or otherwise objectionable
+content. In the app you can <strong>block</strong> any user (they can no longer message you
+or see your profile, and you no longer see theirs) and <strong>report</strong> any message
+or profile. Reports are reviewed within 24 hours; content that violates our
+terms is removed and the responsible account may be suspended or deleted.</p>
+<h2>Your choices</h2>
+<ul>
+<li><strong>Edit or remove</strong> most profile information any time in the app.</li>
+<li><strong>Block or report</strong> any user from their profile or a message.</li>
+<li><strong>Leave a community</strong> to stop sharing new activity with it.</li>
+<li><strong>Delete your account:</strong> Profile → Delete account removes your profile,
+memberships, messages, photos, and encrypted data. You can also email the
+address below. Some content you posted in shared community spaces may remain
+in an anonymised form.</li>
+</ul>
+<h2>Children</h2>
+<p>Merkats is not directed to children under 13 and we do not knowingly collect
+information from them.</p>
+<h2>Changes</h2>
+<p>We may update this policy; material changes will be noted in the app or via the
+recovery email on file.</p>
+<h2>Contact</h2>
+<p>Questions or deletion requests: <strong><a href="mailto:support@merkats.app">support@merkats.app</a></strong></p>
+</div></div>
+<footer class="footer">
+  <div class="cols"><div><h4>Soporte</h4><ul><li><a href="/es/support.html">Contáctanos</a></li><li><a href="/es/support.html#feature">Solicitar una función</a></li><li><a href="/es/terms.html">Términos de uso</a></li><li><a href="/es/privacy.html">Política de privacidad</a></li></ul></div><div><h4>Producto</h4><ul><li><a href="/es/how-it-works.html#host">Conviértete en anfitrión</a></li><li><a href="https://apps.apple.com/us/app/merkats/id6806871553" target="_blank" rel="noopener">Descarga la app para iOS</a></li><li><a href="/es/how-it-works.html">Cómo funciona</a></li><li><a href="/es/login.html#signup">Hazte miembro</a></li></ul></div></div>
+  <a class="store-badge" href="https://apps.apple.com/us/app/merkats/id6806871553" target="_blank" rel="noopener" aria-label="Descarga Merkats en el App Store"><img src="/appstore-badge.svg" alt="Descarga Merkats en el App Store" width="150" height="50"></a>
+  <div class="legal"><span>&copy; 2026 Merkats</span>
+    <div class="prefs"><select id="pref-language" aria-label="Idioma"><option value="en">English</option><option value="es" selected>Español</option><option value="zh">中文</option></select><select id="pref-currency" aria-label="Moneda"><option value="usd" selected>$ USD</option><option value="eur">€ EUR</option><option value="gbp">£ GBP</option></select>
+      <a class="social" href="https://www.instagram.com/merka_ts/" target="_blank" rel="noopener" aria-label="Merkats en Instagram"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a></div>
+  </div>
+</footer>
+<script>
+(() => {
+  const save = (key, value) => { try { localStorage.setItem("merkats." + key, value); } catch {} };
+  // Language: go to the same page in the chosen language.
+  const language = document.getElementById("pref-language");
+  language.addEventListener("change", () => {
+    save("language", language.value);
+    let rest = location.pathname;
+    for (const code of ["es","zh"]) {
+      if (rest === "/" + code || rest.startsWith("/" + code + "/")) rest = rest.slice(code.length + 1) || "/";
+    }
+    location.href = (language.value === "en" ? "" : "/" + language.value) + rest + location.hash;
+  });
+  // The back button can restore a changed select; this page's language wins.
+  addEventListener("pageshow", () => { language.value = "es"; });
+  // Signed in? The header's log-in link becomes a link to your account.
+  try {
+    const signedIn = Object.keys(localStorage).some((k) => k === "merkats.demo.session" || (k.startsWith("sb-") && k.endsWith("-auth-token")));
+    if (signedIn) {
+      const link = document.querySelector(".nav .login");
+      link.textContent = "Mi cuenta";
+      link.href = "/es/app.html";
+    }
+  } catch {}
+  // Currency: remembered only, since the site doesn't show prices yet.
+  const currency = document.getElementById("pref-currency");
+  try { const v = localStorage.getItem("merkats.currency"); if (v && [...currency.options].some((o) => o.value === v)) currency.value = v; } catch {}
+  currency.addEventListener("change", () => save("currency", currency.value));
+})();
+</script>
+</body>
+</html>

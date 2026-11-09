@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="alternate icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<title>Merkats</title>
+<link rel="alternate" hreflang="en" href="https://merkats.app/">
+<link rel="alternate" hreflang="es" href="https://merkats.app/es/">
+<link rel="alternate" hreflang="zh-Hans" href="https://merkats.app/zh/">
+<link rel="alternate" hreflang="x-default" href="https://merkats.app/">
+
+<style>
+  /* Self-hosted so visitors make no request to a third party. Regular weight
+     only, so browsers shouldn't fake a bold. */
+  @font-face { font-family: "IM Fell Great Primer"; src: url("/fonts/IMFellGreatPrimer_400Regular.ttf") format("truetype"); font-style: normal; font-display: swap; }
+  :root { color-scheme: light; }
+  /* The typeface has no Chinese glyphs, so Chinese uses a matching serif. */
+  html[lang^="zh"] body { font-family: "IM Fell Great Primer", "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", SimSun, Georgia, serif; }
+  html[lang^="zh"] .q h2 { max-width: 12em; line-height: 1.25; }
+  .notice { font-size: 18px; color: #6E7D71; border-left: 3px solid #C77D7D; padding-left: 12px; margin: 0 0 22px; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #E5EEE4; color: #33403A;
+    font: 21px/1.55 "IM Fell Great Primer", Georgia, "Times New Roman", serif; font-synthesis: none;
+    -webkit-font-smoothing: antialiased; }
+  a { color: #A85F5F; }
+  
+.mk{position:relative;--s:120px}
+.mk>div,.mk>.anim{position:absolute}
+@keyframes mk-blink{0%,90%,100%{height:0}93%,96%{height:calc(var(--s)*0.15)}}
+/* eyes glance around on the same 7s clock as the eating cycle -- both
+   pupils move together (translate is screen-space, so it works the same
+   whether the eye is positioned from the left or the right) */
+@keyframes mk-look{
+  0%,14.29%,85.71%,100%{transform:translate(0,0)}
+  28.57%{transform:translate(calc(var(--s)*-0.018),calc(var(--s)*-0.012))}
+  42.86%{transform:translate(calc(var(--s)*0.021),calc(var(--s)*0.006))}
+  57.14%{transform:translate(0,calc(var(--s)*0.021))}
+  71.43%{transform:translate(calc(var(--s)*-0.018),calc(var(--s)*0.012))}
+}
+/* jaw grinds in a small circle, panda-with-bamboo style, instead of a plain vertical open/close */
+@keyframes mk-chew{
+  0%,100%{transform:translate(calc(var(--s)*0.018),0) scale(1.05)}
+  12.5%{transform:translate(calc(var(--s)*0.013),calc(var(--s)*0.013)) scale(1.15)}
+  25%{transform:translate(0,calc(var(--s)*0.018)) scale(1.2)}
+  37.5%{transform:translate(calc(var(--s)*-0.013),calc(var(--s)*0.013)) scale(1.1)}
+  50%{transform:translate(calc(var(--s)*-0.018),0) scale(1)}
+  62.5%{transform:translate(calc(var(--s)*-0.013),calc(var(--s)*-0.013)) scale(0.9)}
+  75%{transform:translate(0,calc(var(--s)*-0.018)) scale(0.85)}
+  87.5%{transform:translate(calc(var(--s)*0.013),calc(var(--s)*-0.013)) scale(0.95)}
+}
+/* 7s = exactly 7 chew beats (mk-chew/mk-stick run on a 1s loop), so every
+   phase lands on a beat: quick regrow (beat 0), a held moment (beat 1), then
+   4 beats of continuous eating -- each beat eases in (barely moves at first,
+   then slides in quicker right at the end of that rotation) so it reads as
+   one smooth retraction paced by the chewing, not a series of jumps -- then
+   a beat of nothing before it springs back up. Ends fully at 0: no nub. */
+@keyframes mk-graze{
+  0%{height:0}
+  14.29%{height:calc(var(--s)*0.22)}
+  28.57%{height:calc(var(--s)*0.22);animation-timing-function:ease-in}
+  42.86%{height:calc(var(--s)*0.165);animation-timing-function:ease-in}
+  57.14%{height:calc(var(--s)*0.11);animation-timing-function:ease-in}
+  71.43%{height:calc(var(--s)*0.055);animation-timing-function:ease-in}
+  85.71%,100%{height:0}
+}
+/* the stick sways with the same rhythm as the jaw, like it's being tugged as it's chewed */
+@keyframes mk-stick{0%,100%{transform:rotate(6deg)}25%{transform:rotate(9deg)}50%{transform:rotate(6deg)}75%{transform:rotate(3deg)}}
+@keyframes mk-leaf{0%,12%,63%,100%{opacity:0}20%,57%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.mk .anim{animation:none!important}}
+
+  .page { max-width: 780px; margin: 0 auto; padding: 108px 22px 72px; }
+  /* footer */
+  .footer { background: #DCE8DB; border-top: 1px solid rgba(110,125,113,.25); padding: 44px max(24px, env(safe-area-inset-left)) 26px;
+    font-size: 19px; scroll-snap-align: end; }
+  .footer .cols, .footer .legal { max-width: 1040px; margin: 0 auto; }
+  .footer .cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .footer h4 { font-size: 21px; font-weight: 400; color: #33403A; margin: 0 0 12px; }
+  .footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+  .footer a { color: #4d5c54; text-decoration: none; }
+  .footer a:hover { color: #33403A; text-decoration: underline; }
+  .footer .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; margin-top: 32px; padding-top: 18px;
+    border-top: 1px solid rgba(110,125,113,.25); font-size: 17px; color: #6E7D71; }
+  .footer .store-badge { display: block; max-width: 1040px; margin: 26px auto 0; }
+  .footer .store-badge img { display: block; height: 46px; width: auto; }
+  .footer .legal { align-items: center; }
+  .footer .prefs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+  .footer select { font: inherit; color: #4d5c54; border: 1px solid rgba(110,125,113,.45); border-radius: 9px; cursor: pointer;
+    padding: 6px 34px 6px 14px; appearance: none; -webkit-appearance: none;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%234d5c54' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 13px center; }
+  .footer .social { display: flex; padding: 4px; color: #4d5c54; }
+  .footer .social:hover { color: #33403A; }
+  #host, .help { scroll-margin-top: 130px; }
+  .help { background: #fff; border-radius: 14px; padding: 18px 20px; margin-top: 14px; box-shadow: 0 1px 3px rgba(51,64,58,.08); }
+  .doc .help h2 { margin: 0 0 4px; font-size: 26px; }
+  .help p { margin: 0 0 12px; }
+  .help .cta { display: inline-block; background: #C77D7D; color: #fff; text-decoration: none; padding: 9px 16px; border-radius: 10px; }
+  .help .cta:hover { background: #b56c6c; }
+  .help-mail { margin-top: 18px; text-align: center; font-size: 18px; }
+  @media (max-width: 640px) { .footer .cols { grid-template-columns: 1fr; gap: 0; }
+    .footer .cols > div { padding: 18px 0; border-bottom: 1px solid rgba(110,125,113,.25); } .footer .cols > div:first-child { padding-top: 0; }
+    .footer .cols > div:last-child { border-bottom: 0; } .footer .legal { margin-top: 6px; } }
+  /* top nav */
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10; display: flex; align-items: center;
+    justify-content: space-between; padding: 12px max(24px, env(safe-area-inset-left));
+    background: rgba(229,238,228,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(110,125,113,.15); }
+  .nav nav { display: contents; }
+  .nav .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: #33403A; font-size: 28px; line-height: 1.2; font-weight: 700; font-synthesis: weight; }
+  .nav nav a { color: #4d5c54; text-decoration: none; font-size: 20px; padding: 6px 12px; border-radius: 9px; white-space: nowrap; }
+  .nav nav a:hover, .nav nav a[aria-current] { background: rgba(110,125,113,.14); color: #33403A; }
+  .nav nav a.login { background: #C77D7D; color: #fff; }
+  .nav nav a.login:hover { background: #b56c6c; }
+  /* Phones: name on its own row, then the links spread across the next. */
+  @media (max-width: 760px) {
+    .nav { flex-wrap: wrap; gap: 4px 0; padding: 8px 12px; }
+    .nav .brand { flex: 0 0 100%; justify-content: center; font-size: 24px; }
+    .nav .brand img { width: 32px; height: 32px; }
+    .nav nav a { font-size: 15px; padding: 5px 7px; }
+    .page { padding-top: 118px !important; }
+    .q { padding-top: 118px !important; }
+  }
+  /* Very narrow phones can wrap the links onto a second row. */
+  @media (max-width: 340px) { .page, .q { padding-top: 150px !important; } }
+  /* home: one question per screen */
+  html.snap { scroll-snap-type: y mandatory; }
+  .q { position: relative; min-height: 100vh; min-height: 100svh; scroll-snap-align: start; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; gap: 16px;
+    padding: 90px max(28px, env(safe-area-inset-left)) 60px; }
+  .q:nth-child(even) { background: #DCE8DB; }
+  .q h2 { font-size: clamp(30px, 6vw, 52px); line-height: 1.12;
+    margin: 0; max-width: 16ch; }
+  .q p { font-size: clamp(21px, 2.6vw, 26px); color: #5b6b62; max-width: 32rem; margin: 0; }
+  .q .cta { background: #C77D7D; color: #fff; text-decoration: none; padding: 12px 22px;
+    border-radius: 12px; }
+  .q .badge img { display: block; height: 52px; width: auto; }
+  .hint { position: absolute; bottom: 26px; left: 0; right: 0; color: #6E7D71;
+    font-size: 17px; animation: bob 2s ease-in-out infinite; }
+  @keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(6px) } }
+  .reveal > * { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in > * { opacity: 1; transform: none; }
+  .reveal.in > *:nth-child(2) { transition-delay: .12s } .reveal.in > *:nth-child(3) { transition-delay: .24s }
+  .reveal.in > *:nth-child(4) { transition-delay: .36s } .reveal.in > *:nth-child(5) { transition-delay: .48s }
+  @media (prefers-reduced-motion: reduce) { .reveal > * { opacity: 1; transform: none; transition: none; } .hint { animation: none; } }
+  /* home: line drawings that sketch themselves when a section comes into view */
+  .sk { height: clamp(170px, 32vh, 300px); width: auto; max-width: 100%; fill: none; stroke: #044836; stroke-width: 3.5;
+    stroke-linecap: round; stroke-linejoin: round; filter: url(#sk-rough); overflow: visible; }
+  .sk .accent { stroke: #C77D7D; }
+  .sk path { stroke-dasharray: 1 1; stroke-dashoffset: 1; opacity: 0; }
+  .in .sk path { animation: sk-draw var(--t) ease-in-out var(--d) forwards; }
+  @keyframes sk-draw { from { opacity: 1; stroke-dashoffset: 1; } to { opacity: 1; stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { .sk path { opacity: 1; stroke-dashoffset: 0; } .in .sk path { animation: none; } }
+  .sk-logo { filter: none; }
+  .sk image { opacity: 0; }
+  .in .sk image { animation: sk-fade var(--t) linear var(--d) forwards; }
+  @keyframes sk-fade { to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .sk image { opacity: 1; } .in .sk image { animation: none; } }
+  .q .actions { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 14px; }
+  /* how it works */
+  .doc ol { padding-left: 1.3em; margin: 24px 0 0; display: grid; gap: 14px; }
+  .doc ol li { margin: 0 0 12px; padding: 14px 18px; background: #fff; border-radius: 14px; box-shadow: 0 1px 3px rgba(51,64,58,.08); }
+  .doc ol strong { display: block; font-size: 24px; margin-bottom: 2px; color: #33403A; }
+  /* story photos */
+  .doc figure { margin: 22px 0; }
+  .doc figure img, .photos img { display: block; width: 100%; border-radius: 14px; }
+  .doc figcaption { font-size: 17px; color: #6E7D71; margin-top: 6px; text-align: center; }
+  .photos { display: grid; gap: 10px; margin: 22px 0; }
+  .photos.two { grid-template-columns: 1fr 1fr; } .photos.three { grid-template-columns: repeat(3, 1fr); }
+  .photos img { height: 100%; object-fit: cover; } .photos.two img { aspect-ratio: 4/5; } .photos.three img { aspect-ratio: 1; }
+  /* login */
+  .auth { text-align: center; }
+  .doc .auth h1 { font-size: clamp(44px, 9vw, 64px); line-height: 1.08; margin: 10px 0 0; }
+  .auth form { display: grid; gap: 12px; max-width: 400px; margin: 24px auto 0; text-align: left; background: #fff;
+    border-radius: 14px; padding: 18px; box-shadow: 0 1px 3px rgba(51,64,58,.08); }
+  .auth form[hidden] { display: none; }
+    .auth .req { color: #A85F5F; }
+  .auth .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .auth .fine { font-size: 16px; line-height: 1.45; color: #6E7D71; margin: 0; }
+  .auth .fine a { color: #A85F5F; }
+  .auth label { font-size: 17px; color: #4d5c54; display: grid; gap: 5px; }
+  .auth input { font: inherit; padding: 12px 14px; border-radius: 12px; border: 1px solid #c4d4c8;
+    background: #fff; color: #33403A; }
+  .auth input:focus { outline: 2px solid #C77D7D; outline-offset: 1px; border-color: transparent; }
+  .auth button { font: inherit; padding: 12px; border: 0; border-radius: 12px;
+    background: #C77D7D; color: #fff; cursor: pointer; }
+  .auth button:hover { background: #b56c6c; }
+  .auth button.outline { background: transparent; color: #A85F5F; box-shadow: inset 0 0 0 1.5px #C77D7D; }
+  .auth button.outline:hover { background: #f7ecec; }
+  .auth .note { font-size: 17px; color: #6E7D71; text-align: center; margin: 0; }
+  .auth .note:empty { display: none; }
+  /* home */
+  .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center; gap: 14px;
+    padding-left: max(24px, env(safe-area-inset-left));
+    padding-right: max(24px, env(safe-area-inset-right)); }
+  @media (max-width: 600px) { .hero { padding-left: max(28px, env(safe-area-inset-left));
+    padding-right: max(28px, env(safe-area-inset-right)); } }
+  .hero h1 { font-size: 34px; margin: 6px 0 0; }
+  .hero p { color: #5b6b62; max-width: 30rem; margin: 0; }
+  .hero .links { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+  .hero .links a { background: #C77D7D; color: #fff; text-decoration: none;
+    padding: 11px 20px; border-radius: 12px; }
+  .hero .mail { color: #6E7D71; font-size: 14px; }
+  .hero .badge { display: inline-block; margin-top: 6px; }
+  .hero .badge img { display: block; height: 52px; width: auto; }
+  /* legal docs — no card, plain on the ground */
+  .doc h1 { font-size: 44px; line-height: 1.15; margin: 0 0 8px; }
+  .doc h2 { font-size: 30px; line-height: 1.2; margin: 30px 0 8px; }
+  .doc h3 { font-size: 24px; margin: 22px 0 6px; }
+  .doc p, .doc li { color: #3d4a44; }
+  .doc em { color: #6E7D71; font-style: normal; font-size: 18px; }
+  .doc hr { border: none; border-top: 1px solid #cdddd2; margin: 26px 0; }
+  .doc code { background: #dce8de; padding: 1px 5px; border-radius: 4px; font-size: 90%; }
+  .back { display: inline-block; color: #6E7D71; text-decoration: none;
+    font-size: 14px; margin-bottom: 22px; }
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/es/"><img src="/images/logo.png" alt="" width="40" height="40">merkats</a>
+  <nav><a href="/es/story.html">Historia</a><a href="/es/how-it-works.html">Cómo funciona</a><a href="/es/privacy.html">Privacidad</a>
+  <a class="login" href="/es/login.html">Entrar</a></nav>
+</header>
+<main>
+<section class="q reveal">
+  <svg class="sk" viewBox="0 0 400 244" role="img" aria-label="Vista lateral de una caja bento con la tapa levantada, una sartén al fuego y un plato tapado servido con cariño"><path d="M22 134 L22 186 Q22 196 32 196 L112 196 Q122 196 122 186 L122 134 Z" pathLength="1" style="--d:0.00s;--t:0.48s"/><path d="M22 165 L122 165" pathLength="1" style="--d:0.48s;--t:0.12s"/><path d="M32 134 Q44 112 58 134" pathLength="1" class="accent" style="--d:0.60s;--t:0.16s"/><path d="M60 134 Q72 106 84 134" pathLength="1" class="accent" style="--d:0.76s;--t:0.16s"/><path d="M88 134 Q100 116 112 134" pathLength="1" class="accent" style="--d:0.92s;--t:0.17s"/><path d="M16 96 L16 88 Q16 78 26 78 L118 78 Q128 78 128 88 L128 96 Z" pathLength="1" style="--d:1.09s;--t:0.43s"/><path d="M148 132 Q150 160 176 160 L216 160 Q234 160 236 132 Z" pathLength="1" style="--d:1.51s;--t:0.38s"/><path d="M236 136 L276 124" pathLength="1" style="--d:1.90s;--t:0.12s"/><path d="M170 198 Q160 184 174 172 Q176 184 184 182 Q190 176 186 166 Q206 182 198 198 Q184 206 170 198" pathLength="1" class="accent" style="--d:2.02s;--t:0.67s"/><path d="M172 118 Q162 104 174 92 Q184 80 174 66" pathLength="1" style="--d:2.69s;--t:0.28s"/><path d="M204 118 Q194 104 206 92 Q216 80 206 66" pathLength="1" style="--d:2.97s;--t:0.28s"/><path d="M284 186 Q336 200 392 186" pathLength="1" style="--d:3.25s;--t:0.18s"/><path d="M294 180 Q296 116 338 116 Q380 116 382 180" pathLength="1" style="--d:3.43s;--t:0.30s"/><path d="M330 108 a8 8 0 1 0 16 0 a8 8 0 1 0 -16 0" pathLength="1" style="--d:3.74s;--t:0.30s"/><path d="M338 76 C326 60 306 74 338 96 C370 74 350 60 338 76" pathLength="1" class="accent" style="--d:4.03s;--t:0.37s"/></svg>
+  <h2>¿Qué haces para comer?</h2>
+  <p>¿Comes fuera? ¿Cocinas para ti? ¿Alguien cocina para ti?</p>
+  <span class="hint">Desplázate &darr;</span>
+</section>
+<section class="q reveal">
+  <svg class="sk" viewBox="0 0 400 244" role="img" aria-label="Dibujo de dos personas cocinando en la misma olla y saludándose"><path d="M70 196 L330 196" pathLength="1" style="--d:0.00s;--t:0.12s"/><path d="M100 196 L90 236" pathLength="1" style="--d:0.12s;--t:0.12s"/><path d="M300 196 L310 236" pathLength="1" style="--d:0.24s;--t:0.13s"/><path d="M39 92 a21 21 0 1 0 42 0 a21 21 0 1 0 -42 0" pathLength="1" style="--d:0.37s;--t:0.32s"/><path d="M26 196 Q28 128 60 124 Q92 128 94 196" pathLength="1" style="--d:0.69s;--t:0.28s"/><path d="M319 92 a21 21 0 1 0 42 0 a21 21 0 1 0 -42 0" pathLength="1" style="--d:0.96s;--t:0.33s"/><path d="M306 196 Q308 128 340 124 Q372 128 374 196" pathLength="1" style="--d:1.29s;--t:0.31s"/><path d="M164 142 L170 192 L230 192 L236 142 Z" pathLength="1" style="--d:1.60s;--t:0.28s"/><path d="M154 142 L246 142" pathLength="1" style="--d:1.88s;--t:0.13s"/><path d="M164 156 L148 156" pathLength="1" style="--d:2.01s;--t:0.13s"/><path d="M236 156 L252 156" pathLength="1" style="--d:2.13s;--t:0.13s"/><path d="M90 156 Q118 170 150 132" pathLength="1" style="--d:2.26s;--t:0.18s"/><path d="M150 132 L180 92" pathLength="1" style="--d:2.44s;--t:0.12s"/><path d="M310 156 Q282 170 250 150" pathLength="1" style="--d:2.56s;--t:0.19s"/><path d="M190 126 Q182 112 192 100" pathLength="1" style="--d:2.74s;--t:0.19s"/><path d="M214 126 Q206 112 216 100" pathLength="1" style="--d:2.93s;--t:0.19s"/><path d="M92 42 Q92 20 122 20 L152 20 Q174 20 174 42 Q174 62 152 62 L122 62 L102 78 L106 60 Q92 56 92 42" pathLength="1" class="accent" style="--d:3.12s;--t:0.71s"/><path d="M118 32 L118 52 M118 42 Q128 34 134 42 L134 52" pathLength="1" class="accent" style="--d:3.83s;--t:0.34s"/><path d="M150 40 L150 52 M150 30 L150 32" pathLength="1" class="accent" style="--d:4.17s;--t:0.23s"/></svg>
+  <h2>¿Alguna vez has pensado en cocinar con personas que no conoces?</h2>
+  <p>Repartan las compras, el tiempo de preparación y la limpieza.</p>
+  <span class="hint">Desplázate &darr;</span>
+</section>
+<section class="q reveal">
+  <svg class="sk" viewBox="0 0 400 244" role="img" aria-label="Dibujo de una receta con cada paso marcado y una cuchara mezclando en un tazón"><path d="M44 28 L184 28 Q194 28 194 38 L194 214 Q194 224 184 224 L44 224 Q34 224 34 214 L34 38 Q34 28 44 28 Z" pathLength="1" style="--d:0.00s;--t:0.80s"/><path d="M58 56 L140 56" pathLength="1" style="--d:0.80s;--t:0.11s"/><path d="M58 82 L78 82 L78 102 L58 102 Z" pathLength="1" style="--d:0.91s;--t:0.25s"/><path d="M92 92 L176 92" pathLength="1" style="--d:1.16s;--t:0.11s"/><path d="M62 92 L67 98 L76 84" pathLength="1" class="accent" style="--d:1.27s;--t:0.16s"/><path d="M58 124 L78 124 L78 144 L58 144 Z" pathLength="1" style="--d:1.43s;--t:0.26s"/><path d="M92 134 L176 134" pathLength="1" style="--d:1.69s;--t:0.13s"/><path d="M62 134 L67 140 L76 126" pathLength="1" class="accent" style="--d:1.82s;--t:0.18s"/><path d="M58 166 L78 166 L78 186 L58 186 Z" pathLength="1" style="--d:2.00s;--t:0.26s"/><path d="M92 176 L176 176" pathLength="1" style="--d:2.26s;--t:0.13s"/><path d="M62 176 L67 182 L76 168" pathLength="1" class="accent" style="--d:2.39s;--t:0.18s"/><path d="M208 122 Q226 108 246 120" pathLength="1" class="accent" style="--d:2.57s;--t:0.20s"/><path d="M236 110 L247 120 L234 128" pathLength="1" class="accent" style="--d:2.77s;--t:0.21s"/><path d="M254 146 L398 146" pathLength="1" style="--d:2.98s;--t:0.14s"/><path d="M262 146 Q264 216 326 216 Q388 216 390 146" pathLength="1" style="--d:3.12s;--t:0.33s"/><path d="M300 216 L352 216" pathLength="1" style="--d:3.45s;--t:0.14s"/><path d="M336 144 L372 62" pathLength="1" style="--d:3.59s;--t:0.13s"/><path d="M365 50 a13 13 0 1 0 26 0 a13 13 0 1 0 -26 0" pathLength="1" style="--d:3.71s;--t:0.35s"/><path d="M286 164 Q306 154 326 166 Q346 178 366 164" pathLength="1" class="accent" style="--d:4.07s;--t:0.33s"/></svg>
+  <h2>¿Recién empiezas a cocinar?</h2>
+  <p>No te preocupes: únete a una madriguera Merkats y gana experiencia.</p>
+  <span class="hint">Desplázate &darr;</span>
+</section>
+<section class="q reveal">
+  <svg class="sk" viewBox="0 0 400 244" role="img" aria-label="Dibujo de un gorro de chef junto a una pila de monedas"><path d="M46 222 L354 222" pathLength="1" style="--d:0.00s;--t:0.13s"/><path d="M92 138 Q50 138 50 100 Q50 62 90 68 Q98 30 146 30 Q192 30 202 68 Q244 62 244 100 Q244 138 202 138" pathLength="1" style="--d:0.13s;--t:0.77s"/><path d="M92 138 L92 196 Q147 206 202 196 L202 138" pathLength="1" style="--d:0.89s;--t:0.32s"/><path d="M92 168 Q147 178 202 168" pathLength="1" style="--d:1.22s;--t:0.19s"/><path d="M124 78 L124 118" pathLength="1" style="--d:1.41s;--t:0.13s"/><path d="M170 78 L170 118" pathLength="1" style="--d:1.54s;--t:0.13s"/><path d="M262 208 a34 12 0 1 0 68 0 a34 12 0 1 0 -68 0" pathLength="1" style="--d:1.66s;--t:0.36s"/><path d="M262 208 L262 186" pathLength="1" style="--d:2.02s;--t:0.13s"/><path d="M330 208 L330 186" pathLength="1" style="--d:2.15s;--t:0.13s"/><path d="M262 186 a34 12 0 1 0 68 0 a34 12 0 1 0 -68 0" pathLength="1" style="--d:2.29s;--t:0.36s"/><path d="M262 186 L262 164" pathLength="1" style="--d:2.64s;--t:0.13s"/><path d="M330 186 L330 164" pathLength="1" style="--d:2.78s;--t:0.13s"/><path d="M262 164 a34 12 0 1 0 68 0 a34 12 0 1 0 -68 0" pathLength="1" style="--d:2.91s;--t:0.36s"/><path d="M270 74 a26 26 0 1 0 52 0 a26 26 0 1 0 -52 0" pathLength="1" class="accent" style="--d:3.27s;--t:0.35s"/><path d="M306 64 Q296 54 286 64 Q282 74 296 75 Q310 76 306 86 Q296 96 286 86" pathLength="1" class="accent" style="--d:3.62s;--t:0.53s"/><path d="M296 50 L296 98" pathLength="1" class="accent" style="--d:4.15s;--t:0.12s"/><path d="M296 112 L296 134" pathLength="1" class="accent" style="--d:4.27s;--t:0.13s"/></svg>
+  <h2>¿Ya tienes experiencia como chef?</h2>
+  <p>Abre tu propia cocina Merkats o gana dinero dirigiendo otras cocinas Merkats.</p>
+  <span class="hint">Desplázate &darr;</span>
+</section>
+<section class="q reveal">
+  <svg class="sk sk-logo" viewBox="0 0 1030 1043" style="stroke-width:9.605" role="img" aria-label="El logo de Merkats: una cuchara, un tenedor, una espátula y un cuchillo cruzados"><path d="M542 533 L540 516 L535 510 L522 485 L506 462 L446 392 L363 303 L348 283 L341 269 L336 244 L335 217 L336 203 L335 186 L330 160 L324 143 L314 121 L303 105 L288 86 L267 64 L244 46 L220 31 L200 24 L186 21 L169 19 L149 21 L133 26 L123 33 L113 41 L101 55 L93 71 L88 96 L88 116 L93 141 L102 165 L117 194 L140 223 L154 238 L168 252 L195 270 L208 277 L227 284 L245 289 L274 294 L294 299 L302 303 L317 312 L333 328 L434 449 L475 494 L497 514 L511 524 L520 528 L525 533 L540 533 L542 533 L541 534" pathLength="1" style="--d:0.00s;--t:0.66s"/><path d="M515 475 L490 442" pathLength="1" style="--d:0.66s;--t:0.02s"/><path d="M324 142 L317 127 L324 141" pathLength="1" style="--d:0.68s;--t:0.01s"/><path d="M227 35 L219 31 L226 35" pathLength="1" style="--d:0.70s;--t:0.01s"/><path d="M542 533 L554 532 L578 517 L594 504 L633 463 L748 326 L763 313 L779 304 L794 299 L814 296 L847 294 L856 292 L872 285 L890 273 L909 254 L980 172 L1011 136 L1014 128 L1013 123 L1009 120 L1004 119 L998 122 L885 240 L876 242 L869 238 L866 235 L865 231 L868 222 L912 175 L981 98 L985 90 L983 83 L979 79 L973 79 L967 82 L853 200 L843 205 L838 204 L834 202 L831 198 L830 194 L833 185 L936 71 L946 58 L946 50 L942 45 L935 44 L928 47 L874 101 L815 165 L810 169 L805 171 L800 170 L796 168 L793 165 L792 161 L795 152 L906 31 L908 23 L907 19 L904 15 L897 14 L889 18 L804 98 L760 142 L751 154 L742 169 L736 189 L735 208 L737 238 L736 258 L732 274 L726 289 L713 306 L623 405 L580 456 L559 484 L551 497 L545 511 L542 514" pathLength="1" style="--d:0.70s;--t:1.13s"/><path d="M863 289 L877 282 L869 287" pathLength="1" style="--d:1.84s;--t:0.01s"/><path d="M878 135 L868 147" pathLength="1" style="--d:1.85s;--t:0.01s"/><path d="M1005 143 L989 162" pathLength="1" style="--d:1.85s;--t:0.01s"/><path d="M974 179 L960 196" pathLength="1" style="--d:1.87s;--t:0.01s"/><path d="M949 208 L927 234" pathLength="1" style="--d:1.88s;--t:0.02s"/><path d="M541 534 L541 546 L535 550 L527 567 L518 579 L448 649 L371 722 L355 743 L346 764 L341 791 L343 811 L350 839 L352 851 L351 866 L344 881 L326 900 L204 1017 L198 1023 L189 1027 L182 1029 L174 1029 L165 1026 L157 1021 L124 987 L28 881 L19 869 L15 858 L15 848 L19 837 L35 819 L66 793 L166 710 L182 699 L199 695 L214 695 L256 709 L278 712 L299 710 L309 707 L321 701 L333 692 L418 616 L478 565 L504 547 L520 538 L524 535 L524 536 L503 547" pathLength="1" style="--d:1.89s;--t:0.71s"/><path d="M493 554 L469 572" pathLength="1" style="--d:2.60s;--t:0.01s"/><path d="M209 738 L204 735 L199 735 L189 739 L76 831 L69 839 L66 846 L67 852 L72 857 L79 858 L86 856 L206 757 L209 753 L211 748 L210 742 L207 737 L209 739" pathLength="1" style="--d:2.61s;--t:0.18s"/><path d="M187 773 L120 827" pathLength="1" style="--d:2.79s;--t:0.04s"/><path d="M105 878 L225 773 L233 771 L241 774 L244 782 L243 787 L241 791 L120 900 L111 902 L107 902 L103 899 L100 895 L99 890 L101 883 L105 879 L101 883" pathLength="1" style="--d:2.83s;--t:0.18s"/><path d="M142 919 L243 827 L260 812 L265 810 L273 811 L278 816 L280 824 L277 831 L239 867 L167 931 L152 943 L147 944 L142 942 L137 937 L136 931 L137 925 L143 919" pathLength="1" style="--d:3.01s;--t:0.18s"/><path d="M294 852 L304 850 L308 852 L311 855 L313 860 L312 864 L308 872 L194 976 L188 978 L183 979 L178 977 L174 974 L173 967 L177 959 L293 853" pathLength="1" style="--d:3.19s;--t:0.18s"/><path d="M185 952 L176 960" pathLength="1" style="--d:3.37s;--t:0.01s"/><path d="M23 875 L19 869" pathLength="1" style="--d:3.38s;--t:0.00s"/><path d="M114 753 L122 746 L120 749" pathLength="1" style="--d:3.38s;--t:0.01s"/><path d="M225 773 L212 784" pathLength="1" style="--d:3.39s;--t:0.01s"/><path d="M554 534 L560 539 L582 550 L604 567 L698 647 L780 720 L790 731 L789 734 L785 738 L752 767 L747 768 L742 765 L647 672 L590 612 L561 577 L551 562 L544 548 L541 546" pathLength="1" style="--d:3.39s;--t:0.30s"/><path d="M645 669 L704 728" pathLength="1" style="--d:3.70s;--t:0.04s"/><path d="M733 757 L747 770 L747 797 L742 814 L744 820 L797 881 L835 918 L878 953 L906 971 L925 980 L945 987 L960 989 L976 987 L985 984 L993 979 L998 975 L1002 967 L1004 961 L1004 946 L1000 936 L996 930 L956 882 L905 828 L867 793 L809 744 L801 737 L791 732" pathLength="1" style="--d:3.73s;--t:0.33s"/><path d="M810 745 L853 781" pathLength="1" style="--d:4.06s;--t:0.03s"/><path d="M858 786 L869 795" pathLength="1" style="--d:4.09s;--t:0.01s"/><path d="M918 841 L924 848" pathLength="1" style="--d:4.10s;--t:0.00s"/><image href="/images/logo-large.png" width="1030" height="1043" style="--d:4.10s;--t:0.3s"/></svg>
+  <h2>Ven a cocinar con nosotros.</h2>
+  <div class="actions"><a class="cta" href="/es/how-it-works.html">Mira cómo funciona</a></div>
+</section>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="sk-rough"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter></svg>
+</main>
+<script>
+document.documentElement.classList.add("snap");
+const io = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle("in", e.isIntersecting)), { threshold: 0.35 });
+document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+</script>
+<footer class="footer">
+  <div class="cols"><div><h4>Soporte</h4><ul><li><a href="/es/support.html">Contáctanos</a></li><li><a href="/es/support.html#feature">Solicitar una función</a></li><li><a href="/es/terms.html">Términos de uso</a></li><li><a href="/es/privacy.html">Política de privacidad</a></li></ul></div><div><h4>Producto</h4><ul><li><a href="/es/how-it-works.html#host">Conviértete en anfitrión</a></li><li><a href="https://apps.apple.com/us/app/merkats/id6806871553" target="_blank" rel="noopener">Descarga la app para iOS</a></li><li><a href="/es/how-it-works.html">Cómo funciona</a></li><li><a href="/es/login.html#signup">Hazte miembro</a></li></ul></div></div>
+  <a class="store-badge" href="https://apps.apple.com/us/app/merkats/id6806871553" target="_blank" rel="noopener" aria-label="Descarga Merkats en el App Store"><img src="/appstore-badge.svg" alt="Descarga Merkats en el App Store" width="150" height="50"></a>
+  <div class="legal"><span>&copy; 2026 Merkats</span>
+    <div class="prefs"><select id="pref-language" aria-label="Idioma"><option value="en">English</option><option value="es" selected>Español</option><option value="zh">中文</option></select><select id="pref-currency" aria-label="Moneda"><option value="usd" selected>$ USD</option><option value="eur">€ EUR</option><option value="gbp">£ GBP</option></select>
+      <a class="social" href="https://www.instagram.com/merka_ts/" target="_blank" rel="noopener" aria-label="Merkats en Instagram"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a></div>
+  </div>
+</footer>
+<script>
+(() => {
+  const save = (key, value) => { try { localStorage.setItem("merkats." + key, value); } catch {} };
+  // Language: go to the same page in the chosen language.
+  const language = document.getElementById("pref-language");
+  language.addEventListener("change", () => {
+    save("language", language.value);
+    let rest = location.pathname;
+    for (const code of ["es","zh"]) {
+      if (rest === "/" + code || rest.startsWith("/" + code + "/")) rest = rest.slice(code.length + 1) || "/";
+    }
+    location.href = (language.value === "en" ? "" : "/" + language.value) + rest + location.hash;
+  });
+  // The back button can restore a changed select; this page's language wins.
+  addEventListener("pageshow", () => { language.value = "es"; });
+  // Signed in? The header's log-in link becomes a link to your account.
+  try {
+    const signedIn = Object.keys(localStorage).some((k) => k === "merkats.demo.session" || (k.startsWith("sb-") && k.endsWith("-auth-token")));
+    if (signedIn) {
+      const link = document.querySelector(".nav .login");
+      link.textContent = "Mi cuenta";
+      link.href = "/es/app.html";
+    }
+  } catch {}
+  // Currency: remembered only, since the site doesn't show prices yet.
+  const currency = document.getElementById("pref-currency");
+  try { const v = localStorage.getItem("merkats.currency"); if (v && [...currency.options].some((o) => o.value === v)) currency.value = v; } catch {}
+  currency.addEventListener("change", () => save("currency", currency.value));
+})();
+</script>
+</body>
+</html>

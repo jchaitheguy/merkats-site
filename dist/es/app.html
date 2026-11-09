@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="alternate icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/leaflet.css"><link rel="stylesheet" href="/assets/app.css">
+<script>window.MERKATS = {"t":{"demoBanner":"Modo demo: nada aquí es real y ningún dato sale de este navegador.","tabs":{"map":"Mapa","meals":"Mis comidas","host":"Herramientas","settings":"Ajustes","admin":"Aprobaciones"},"common":{"save":"Guardar","cancel":"Cancelar","back":"Volver","loading":"Cargando…","remove":"Quitar","yes":"Sí","no":"No","next":"Siguiente","done":"Listo","skip":"Omitir"},"auth":{"identifier":"Usuario o correo","roleQ":"¿Cómo usarás Merkats?","member":"Miembro","memberDesc":"Únete a sesiones de preparación de comidas cerca de ti.","host":"Anfitrión","hostDesc":"Abre tu cocina para sesiones y recibe un pago.","checkEmail":"Revisa tu correo para confirmar tu cuenta y luego inicia sesión."},"map":{"title":"Encuentra una cocina cerca de ti","nearMe":"Usar mi ubicación","empty":"Todavía no hay cocinas aprobadas.","locating":"Buscando tu ubicación…","denied":"No pudimos obtener tu ubicación. Aun así puedes explorar el mapa.","miles":"mi de distancia","approx":"Los pines son aproximados. Recibirás la dirección exacta después de pagar."},"location":{"upcoming":"Próximas comidas","noMeals":"Todavía no hay comidas programadas aquí.","seatsLeft":"lugares libres","full":"Completo","commit":"Comprometerme y pagar","committed":"Ya estás dentro","yours":"Esta es tu sesión.","switchToJoin":"Cambia a una cuenta de miembro en Ajustes para unirte.","address":"Dirección","directions":"Indicaciones","perPerson":"por persona","notFound":"No encontramos esa cocina."},"meals":{"title":"Mis comidas","empty":"Todavía no te has unido a ninguna sesión.","find":"Buscar una cocina","leave":"Salir de la sesión","leaveConfirm":"¿Salir de esta sesión? Recibirás un reembolso completo si faltan más de 24 horas.","status":{"pending":"Pago pendiente","paid":"Pagado","completed":"Completada","cancelled":"Cancelada","refunded":"Reembolsada"},"paidToast":"¡Ya estás dentro! Recibimos tu pago.","cancelledToast":"Pago cancelado. No se te cobró.","leftToast":"Saliste de la sesión."},"host":{"title":"Herramientas de anfitrión","register":"Registra tu cocina","registerHelp":"Cuéntanos sobre tu espacio. Revisamos cada cocina y, cuando se aprueba, aparece en el mapa.","name":"Nombre de la cocina","description":"Sobre el espacio","address":"Dirección","addressHelp":"Empieza a escribir y elige tu dirección de la lista.","pickAddress":"Elige una dirección de la lista.","directions":"Indicaciones para miembros (opcional)","capacityNote":"Solo los miembros que han pagado pueden ver la dirección exacta y las indicaciones.","submit":"Enviar para aprobación","resubmit":"Editar y reenviar","submitted":"¡Enviado! Revisaremos tu cocina pronto.","another":"Añadir otra cocina","status":{"pending":"Esperando aprobación","approved":"Aprobada","rejected":"No aprobada"},"note":"Nota de Merkats","sessions":"Sesiones","noSessions":"Todavía no hay sesiones.","newSession":"Nueva sesión","approveFirst":"Podrás añadir sesiones cuando esta cocina esté aprobada.","payoutsTitle":"Recibe tus pagos","payoutsNeeded":"Configura tus pagos para que los miembros puedan pagar tus sesiones.","payoutsReady":"Tus pagos están configurados.","setup":"Configurar pagos","dashboard":"Ver pagos"},"session":{"title":"Nombre de la sesión","menu":"Menú","when":"Fecha y hora","duration":"Duración (minutos)","price":"Precio por miembro ($)","seats":"Lugares","payoutHint":"Recibes {host} por miembro después de la comisión de {pct}% de Merkats. Debe cubrir las compras y tu espacio.","created":"Sesión creada.","saved":"Guardado.","manage":"Gestionar","cancelSession":"Cancelar sesión","cancelConfirm":"¿Cancelar esta sesión? Todos los que pagaron recibirán un reembolso completo.","cancelled":"Cancelada","cancelledToast":"Sesión cancelada.","notFound":"No encontramos esa sesión.","locked":"Ya hay personas comprometidas, así que la fecha y el precio están bloqueados."},"groceries":{"title":"Compras","item":"Artículo","qty":"Cantidad","estimate":"Estimado ($)","actual":"Real ($)","bought":"Comprado","add":"Añadir artículo","empty":"Todavía no hay compras.","total":"Total"},"roster":{"title":"Miembros","name":"Nombre","status":"Estado","paid":"Al día","committed":"Comprometido","empty":"Todavía nadie se ha comprometido.","summary":"{paid} pagados de {seats} lugares","payout":"Tu pago hasta ahora"},"settings":{"title":"Ajustes","account":"Cuenta","role":"Tipo de cuenta","roleSaved":"Tipo de cuenta actualizado.","tutorial":"Repetir el tutorial","signOut":"Cerrar sesión"},"admin":{"title":"Aprobación de cocinas","empty":"No hay nada pendiente de revisión.","approve":"Aprobar","reject":"Rechazar","notePrompt":"Nota para el anfitrión (opcional)","approved":"Aprobada. Ya está en el mapa.","rejected":"Rechazada.","submittedBy":"Enviada por"},"tutorial":{"step":"Paso {n} de {total}","member":[{"route":"map","target":"map","title":"Encuentra cocinas cerca de ti","body":"Las cocinas aprobadas de Merkats aparecen en este mapa. Usa tu ubicación para ver cuáles están cerca."},{"route":"map","target":"list","title":"Elige un anfitrión","body":"Selecciona una cocina para ver sus próximas comidas, el menú, el precio y los lugares libres."},{"route":"meals","target":"meals","title":"Tus comidas","body":"Después de comprometerte y pagar, tus sesiones aparecen aquí con la dirección exacta."},{"route":"settings","target":"role","title":"Tu cuenta","body":"¿Tienes una cocina para compartir? Puedes cambiar a una cuenta de anfitrión aquí cuando quieras."}],"host":[{"route":"host","target":"location","title":"Registra tu cocina","body":"Empieza aquí. Cuéntanos sobre tu espacio y lo revisaremos. Cuando se apruebe, aparecerá en el mapa."},{"route":"host","target":"payouts","title":"Recibe tus pagos","body":"Configura tus pagos para que los miembros puedan pagar tus sesiones. Te pagamos después de cada sesión."},{"route":"host","target":"hostTab","title":"Organiza tus sesiones","body":"Una vez aprobada la cocina, aquí creas sesiones con el menú y el precio. Cada una tiene una tabla de compras y una lista de quién se ha comprometido y ha pagado."},{"route":"map","target":"map","title":"Cómo te ven los miembros","body":"Los miembros te encuentran en este mapa. Tu pin es aproximado hasta que pagan."},{"route":"settings","target":"role","title":"Tu cuenta","body":"Aquí puedes cambiar el tipo de cuenta o repetir este tutorial."}]},"errors":{"try_again":"Algo salió mal. Inténtalo de nuevo.","username_taken":"Ese usuario ya está en uso.","email_taken":"Ya existe una cuenta con este correo. Inicia sesión.","no_account":"No hay ninguna cuenta con ese usuario.","bad_login":"Usuario o contraseña incorrectos.","email_unconfirmed":"Primero confirma tu correo.","weak_password":"Tu contraseña es demasiado débil.","session_full":"Esta sesión acaba de llenarse.","session_closed":"Esta sesión ya no admite miembros nuevos.","session_unavailable":"Esta sesión no está disponible.","already_committed":"Ya te uniste a esta sesión.","own_session":"No puedes unirte a tu propia sesión.","host_not_ready":"Este anfitrión aún está configurando sus pagos, así que todavía no se puede pagar.","too_late_to_cancel":"Faltan menos de 24 horas para la sesión, así que no se puede cancelar.","cannot_cancel":"No se puede cancelar.","not_a_host":"Primero cambia a una cuenta de anfitrión.","not_allowed":"No tienes permiso para hacer eso.","session_has_commitments":"Ya hay personas comprometidas, así que la fecha y el precio están bloqueados.","seats_below_committed":"No puedes tener menos lugares que miembros comprometidos.","address_unavailable":"La búsqueda de direcciones no está disponible ahora."}},"auth":{"create":"Crea tu cuenta","welcome":"Hola de nuevo"},"lang":"es","prefix":"/es","feePercent":10,"config":{"url":"https://ythzbmfhkeavfpzyrurt.supabase.co","anonKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0aHpibWZoa2VhdmZwenlydXJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc0MjczOTIsImV4cCI6MjEwMzAwMzM5Mn0.ivzblycmdJFEtpQ7ILsBuYHQ0DB3hB6BKz8guS3Oz_M"}};</script>
+<script src="/assets/app.js" defer></script>
+<title>Merkats — Mi cuenta</title>
+<link rel="alternate" hreflang="en" href="https://merkats.app/app.html">
+<link rel="alternate" hreflang="es" href="https://merkats.app/es/app.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://merkats.app/zh/app.html">
+<link rel="alternate" hreflang="x-default" href="https://merkats.app/app.html">
+
+<style>
+  /* Self-hosted so visitors make no request to a third party. Regular weight
+     only, so browsers shouldn't fake a bold. */
+  @font-face { font-family: "IM Fell Great Primer"; src: url("/fonts/IMFellGreatPrimer_400Regular.ttf") format("truetype"); font-style: normal; font-display: swap; }
+  :root { color-scheme: light; }
+  /* The typeface has no Chinese glyphs, so Chinese uses a matching serif. */
+  html[lang^="zh"] body { font-family: "IM Fell Great Primer", "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", SimSun, Georgia, serif; }
+  html[lang^="zh"] .q h2 { max-width: 12em; line-height: 1.25; }
+  .notice { font-size: 18px; color: #6E7D71; border-left: 3px solid #C77D7D; padding-left: 12px; margin: 0 0 22px; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #E5EEE4; color: #33403A;
+    font: 21px/1.55 "IM Fell Great Primer", Georgia, "Times New Roman", serif; font-synthesis: none;
+    -webkit-font-smoothing: antialiased; }
+  a { color: #A85F5F; }
+  
+.mk{position:relative;--s:120px}
+.mk>div,.mk>.anim{position:absolute}
+@keyframes mk-blink{0%,90%,100%{height:0}93%,96%{height:calc(var(--s)*0.15)}}
+/* eyes glance around on the same 7s clock as the eating cycle -- both
+   pupils move together (translate is screen-space, so it works the same
+   whether the eye is positioned from the left or the right) */
+@keyframes mk-look{
+  0%,14.29%,85.71%,100%{transform:translate(0,0)}
+  28.57%{transform:translate(calc(var(--s)*-0.018),calc(var(--s)*-0.012))}
+  42.86%{transform:translate(calc(var(--s)*0.021),calc(var(--s)*0.006))}
+  57.14%{transform:translate(0,calc(var(--s)*0.021))}
+  71.43%{transform:translate(calc(var(--s)*-0.018),calc(var(--s)*0.012))}
+}
+/* jaw grinds in a small circle, panda-with-bamboo style, instead of a plain vertical open/close */
+@keyframes mk-chew{
+  0%,100%{transform:translate(calc(var(--s)*0.018),0) scale(1.05)}
+  12.5%{transform:translate(calc(var(--s)*0.013),calc(var(--s)*0.013)) scale(1.15)}
+  25%{transform:translate(0,calc(var(--s)*0.018)) scale(1.2)}
+  37.5%{transform:translate(calc(var(--s)*-0.013),calc(var(--s)*0.013)) scale(1.1)}
+  50%{transform:translate(calc(var(--s)*-0.018),0) scale(1)}
+  62.5%{transform:translate(calc(var(--s)*-0.013),calc(var(--s)*-0.013)) scale(0.9)}
+  75%{transform:translate(0,calc(var(--s)*-0.018)) scale(0.85)}
+  87.5%{transform:translate(calc(var(--s)*0.013),calc(var(--s)*-0.013)) scale(0.95)}
+}
+/* 7s = exactly 7 chew beats (mk-chew/mk-stick run on a 1s loop), so every
+   phase lands on a beat: quick regrow (beat 0), a held moment (beat 1), then
+   4 beats of continuous eating -- each beat eases in (barely moves at first,
+   then slides in quicker right at the end of that rotation) so it reads as
+   one smooth retraction paced by the chewing, not a series of jumps -- then
+   a beat of nothing before it springs back up. Ends fully at 0: no nub. */
+@keyframes mk-graze{
+  0%{height:0}
+  14.29%{height:calc(var(--s)*0.22)}
+  28.57%{height:calc(var(--s)*0.22);animation-timing-function:ease-in}
+  42.86%{height:calc(var(--s)*0.165);animation-timing-function:ease-in}
+  57.14%{height:calc(var(--s)*0.11);animation-timing-function:ease-in}
+  71.43%{height:calc(var(--s)*0.055);animation-timing-function:ease-in}
+  85.71%,100%{height:0}
+}
+/* the stick sways with the same rhythm as the jaw, like it's being tugged as it's chewed */
+@keyframes mk-stick{0%,100%{transform:rotate(6deg)}25%{transform:rotate(9deg)}50%{transform:rotate(6deg)}75%{transform:rotate(3deg)}}
+@keyframes mk-leaf{0%,12%,63%,100%{opacity:0}20%,57%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.mk .anim{animation:none!important}}
+
+  .page { max-width: 780px; margin: 0 auto; padding: 108px 22px 72px; }
+  /* footer */
+  .footer { background: #DCE8DB; border-top: 1px solid rgba(110,125,113,.25); padding: 44px max(24px, env(safe-area-inset-left)) 26px;
+    font-size: 19px; scroll-snap-align: end; }
+  .footer .cols, .footer .legal { max-width: 1040px; margin: 0 auto; }
+  .footer .cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .footer h4 { font-size: 21px; font-weight: 400; color: #33403A; margin: 0 0 12px; }
+  .footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+  .footer a { color: #4d5c54; text-decoration: none; }
+  .footer a:hover { color: #33403A; text-decoration: underline; }
+  .footer .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; margin-top: 32px; padding-top: 18px;
+    border-top: 1px solid rgba(110,125,113,.25); font-size: 17px; color: #6E7D71; }
+  .footer .store-badge { display: block; max-width: 1040px; margin: 26px auto 0; }
+  .footer .store-badge img { display: block; height: 46px; width: auto; }
+  .footer .legal { align-items: center; }
+  .footer .prefs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+  .footer select { font: inherit; color: #4d5c54; border: 1px solid rgba(110,125,113,.45); border-radius: 9px; cursor: pointer;
+    padding: 6px 34px 6px 14px; appearance: none; -webkit-appearance: none;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%234d5c54' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 13px center; }
+  .footer .social { display: flex; padding: 4px; color: #4d5c54; }
+  .footer .social:hover { color: #33403A; }
+  #host, .help { scroll-margin-top: 130px; }
+  .help { background: #fff; border-radius: 14px; padding: 18px 20px; margin-top: 14px; box-shadow: 0 1px 3px rgba(51,64,58,.08); }
+  .doc .help h2 { margin: 0 0 4px; font-size: 26px; }
+  .help p { margin: 0 0 12px; }
+  .help .cta { display: inline-block; background: #C77D7D; color: #fff; text-decoration: none; padding: 9px 16px; border-radius: 10px; }
+  .help .cta:hover { background: #b56c6c; }
+  .help-mail { margin-top: 18px; text-align: center; font-size: 18px; }
+  @media (max-width: 640px) { .footer .cols { grid-template-columns: 1fr; gap: 0; }
+    .footer .cols > div { padding: 18px 0; border-bottom: 1px solid rgba(110,125,113,.25); } .footer .cols > div:first-child { padding-top: 0; }
+    .footer .cols > div:last-child { border-bottom: 0; } .footer .legal { margin-top: 6px; } }
+  /* top nav */
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10; display: flex; align-items: center;
+    justify-content: space-between; padding: 12px max(24px, env(safe-area-inset-left));
+    background: rgba(229,238,228,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(110,125,113,.15); }
+  .nav nav { display: contents; }
+  .nav .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: #33403A; font-size: 28px; line-height: 1.2; font-weight: 700; font-synthesis: weight; }
+  .nav nav a { color: #4d5c54; text-decoration: none; font-size: 20px; padding: 6px 12px; border-radius: 9px; white-space: nowrap; }
+  .nav nav a:hover, .nav nav a[aria-current] { background: rgba(110,125,113,.14); color: #33403A; }
+  .nav nav a.login { background: #C77D7D; color: #fff; }
+  .nav nav a.login:hover { background: #b56c6c; }
+  /* Phones: name on its own row, then the links spread across the next. */
+  @media (max-width: 760px) {
+    .nav { flex-wrap: wrap; gap: 4px 0; padding: 8px 12px; }
+    .nav .brand { flex: 0 0 100%; justify-content: center; font-size: 24px; }
+    .nav .brand img { width: 32px; height: 32px; }
+    .nav nav a { font-size: 15px; padding: 5px 7px; }
+    .page { padding-top: 118px !important; }
+    .q { padding-top: 118px !important; }
+  }
+  /* Very narrow phones can wrap the links onto a second row. */
+  @media (max-width: 340px) { .page, .q { padding-top: 150px !important; } }
+  /* home: one question per screen */
+  html.snap { scroll-snap-type: y mandatory; }
+  .q { position: relative; min-height: 100vh; min-height: 100svh; scroll-snap-align: start; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; gap: 16px;
+    padding: 90px max(28px, env(safe-area-inset-left)) 60px; }
+  .q:nth-child(even) { background: #DCE8DB; }
+  .q h2 { font-size: clamp(30px, 6vw, 52px); line-height: 1.12;
+    margin: 0; max-width: 16ch; }
+  .q p { font-size: clamp(21px, 2.6vw, 26px); color: #5b6b62; max-width: 32rem; margin: 0; }
+  .q .cta { background: #C77D7D; color: #fff; text-decoration: none; padding: 12px 22px;
+    border-radius: 12px; }
+  .q .badge img { display: block; height: 52px; width: auto; }
+  .hint { position: absolute; bottom: 26px; left: 0; right: 0; color: #6E7D71;
+    font-size: 17px; animation: bob 2s ease-in-out infinite; }
+  @keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(6px) } }
+  .reveal > * { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in > * { opacity: 1; transform: none; }
+  .reveal.in > *:nth-child(2) { transition-delay: .12s } .reveal.in > *:nth-child(3) { transition-delay: .24s }
+  .reveal.in > *:nth-child(4) { transition-delay: .36s } .reveal.in > *:nth-child(5) { transition-delay: .48s }
+  @media (prefers-reduced-motion: reduce) { .reveal > * { opacity: 1; transform: none; transition: none; } .hint { animation: none; } }
+  /* home: line drawings that sketch themselves when a section comes into view */
+  .sk { height: clamp(170px, 32vh, 300px); width: auto; max-width: 100%; fill: none; stroke: #044836; stroke-width: 3.5;
+    stroke-linecap: round; stroke-linejoin: round; filter: url(#sk-rough); overflow: visible; }
+  .sk .accent { stroke: #C77D7D; }
+  .sk path { stroke-dasharray: 1 1; stroke-dashoffset: 1; opacity: 0; }
+  .in .sk path { animation: sk-draw var(--t) ease-in-out var(--d) forwards; }
+  @keyframes sk-draw { from { opacity: 1; stroke-dashoffset: 1; } to { opacity: 1; stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { .sk path { opacity: 1; stroke-dashoffset: 0; } .in .sk path { animation: none; } }
+  .sk-logo { filter: none; }
+  .sk image { opacity: 0; }
+  .in .sk image { animation: sk-fade var(--t) linear var(--d) forwards; }
+  @keyframes sk-fade { to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .sk image { opacity: 1; } .in .sk image { animation: none; } }
+  .q .actions { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 14px; }
+  /* how it works */
+  .doc ol { padding-left: 1.3em; margin: 24px 0 0; display: grid; gap: 14px; }
+  .doc ol li { margin: 0 0 12px; padding: 14px 18px; background: #fff; border-radius: 14px; box-shadow: 0 1px 3px rgba(51,64,58,.08); }
+  .doc ol strong { display: block; font-size: 24px; margin-bottom: 2px; color: #33403A; }
+  /* story photos */
+  .doc figure { margin: 22px 0; }
+  .doc figure img, .photos img { display: block; width: 100%; border-radius: 14px; }
+  .doc figcaption { font-size: 17px; color: #6E7D71; margin-top: 6px; text-align: center; }
+  .photos { display: grid; gap: 10px; margin: 22px 0; }
+  .photos.two { grid-template-columns: 1fr 1fr; } .photos.three { grid-template-columns: repeat(3, 1fr); }
+  .photos img { height: 100%; object-fit: cover; } .photos.two img { aspect-ratio: 4/5; } .photos.three img { aspect-ratio: 1; }
+  /* login */
+  .auth { text-align: center; }
+  .doc .auth h1 { font-size: clamp(44px, 9vw, 64px); line-height: 1.08; margin: 10px 0 0; }
+  .auth form { display: grid; gap: 12px; max-width: 400px; margin: 24px auto 0; text-align: left; background: #fff;
+    border-radius: 14px; padding: 18px; box-shadow: 0 1px 3px rgba(51,64,58,.08); }
+  .auth form[hidden] { display: none; }
+    .auth .req { color: #A85F5F; }
+  .auth .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .auth .fine { font-size: 16px; line-height: 1.45; color: #6E7D71; margin: 0; }
+  .auth .fine a { color: #A85F5F; }
+  .auth label { font-size: 17px; color: #4d5c54; display: grid; gap: 5px; }
+  .auth input { font: inherit; padding: 12px 14px; border-radius: 12px; border: 1px solid #c4d4c8;
+    background: #fff; color: #33403A; }
+  .auth input:focus { outline: 2px solid #C77D7D; outline-offset: 1px; border-color: transparent; }
+  .auth button { font: inherit; padding: 12px; border: 0; border-radius: 12px;
+    background: #C77D7D; color: #fff; cursor: pointer; }
+  .auth button:hover { background: #b56c6c; }
+  .auth button.outline { background: transparent; color: #A85F5F; box-shadow: inset 0 0 0 1.5px #C77D7D; }
+  .auth button.outline:hover { background: #f7ecec; }
+  .auth .note { font-size: 17px; color: #6E7D71; text-align: center; margin: 0; }
+  .auth .note:empty { display: none; }
+  /* home */
+  .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center; gap: 14px;
+    padding-left: max(24px, env(safe-area-inset-left));
+    padding-right: max(24px, env(safe-area-inset-right)); }
+  @media (max-width: 600px) { .hero { padding-left: max(28px, env(safe-area-inset-left));
+    padding-right: max(28px, env(safe-area-inset-right)); } }
+  .hero h1 { font-size: 34px; margin: 6px 0 0; }
+  .hero p { color: #5b6b62; max-width: 30rem; margin: 0; }
+  .hero .links { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+  .hero .links a { background: #C77D7D; color: #fff; text-decoration: none;
+    padding: 11px 20px; border-radius: 12px; }
+  .hero .mail { color: #6E7D71; font-size: 14px; }
+  .hero .badge { display: inline-block; margin-top: 6px; }
+  .hero .badge img { display: block; height: 52px; width: auto; }
+  /* legal docs — no card, plain on the ground */
+  .doc h1 { font-size: 44px; line-height: 1.15; margin: 0 0 8px; }
+  .doc h2 { font-size: 30px; line-height: 1.2; margin: 30px 0 8px; }
+  .doc h3 { font-size: 24px; margin: 22px 0 6px; }
+  .doc p, .doc li { color: #3d4a44; }
+  .doc em { color: #6E7D71; font-style: normal; font-size: 18px; }
+  .doc hr { border: none; border-top: 1px solid #cdddd2; margin: 26px 0; }
+  .doc code { background: #dce8de; padding: 1px 5px; border-radius: 4px; font-size: 90%; }
+  .back { display: inline-block; color: #6E7D71; text-decoration: none;
+    font-size: 14px; margin-bottom: 22px; }
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/es/"><img src="/images/logo.png" alt="" width="40" height="40">merkats</a>
+  <nav><a href="/es/story.html">Historia</a><a href="/es/how-it-works.html">Cómo funciona</a><a href="/es/privacy.html">Privacidad</a>
+  <a class="login" href="/es/login.html">Entrar</a></nav>
+</header>
+<main id="app" class="app-wrap"></main>
+<footer class="footer">
+  <div class="cols"><div><h4>Soporte</h4><ul><li><a href="/es/support.html">Contáctanos</a></li><li><a href="/es/support.html#feature">Solicitar una función</a></li><li><a href="/es/terms.html">Términos de uso</a></li><li><a href="/es/privacy.html">Política de privacidad</a></li></ul></div><div><h4>Producto</h4><ul><li><a href="/es/how-it-works.html#host">Conviértete en anfitrión</a></li><li><a href="https://apps.apple.com/us/app/merkats/id6806871553" target="_blank" rel="noopener">Descarga la app para iOS</a></li><li><a href="/es/how-it-works.html">Cómo funciona</a></li><li><a href="/es/login.html#signup">Hazte miembro</a></li></ul></div></div>
+  <a class="store-badge" href="https://apps.apple.com/us/app/merkats/id6806871553" target="_blank" rel="noopener" aria-label="Descarga Merkats en el App Store"><img src="/appstore-badge.svg" alt="Descarga Merkats en el App Store" width="150" height="50"></a>
+  <div class="legal"><span>&copy; 2026 Merkats</span>
+    <div class="prefs"><select id="pref-language" aria-label="Idioma"><option value="en">English</option><option value="es" selected>Español</option><option value="zh">中文</option></select><select id="pref-currency" aria-label="Moneda"><option value="usd" selected>$ USD</option><option value="eur">€ EUR</option><option value="gbp">£ GBP</option></select>
+      <a class="social" href="https://www.instagram.com/merka_ts/" target="_blank" rel="noopener" aria-label="Merkats en Instagram"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a></div>
+  </div>
+</footer>
+<script>
+(() => {
+  const save = (key, value) => { try { localStorage.setItem("merkats." + key, value); } catch {} };
+  // Language: go to the same page in the chosen language.
+  const language = document.getElementById("pref-language");
+  language.addEventListener("change", () => {
+    save("language", language.value);
+    let rest = location.pathname;
+    for (const code of ["es","zh"]) {
+      if (rest === "/" + code || rest.startsWith("/" + code + "/")) rest = rest.slice(code.length + 1) || "/";
+    }
+    location.href = (language.value === "en" ? "" : "/" + language.value) + rest + location.hash;
+  });
+  // The back button can restore a changed select; this page's language wins.
+  addEventListener("pageshow", () => { language.value = "es"; });
+  // Signed in? The header's log-in link becomes a link to your account.
+  try {
+    const signedIn = Object.keys(localStorage).some((k) => k === "merkats.demo.session" || (k.startsWith("sb-") && k.endsWith("-auth-token")));
+    if (signedIn) {
+      const link = document.querySelector(".nav .login");
+      link.textContent = "Mi cuenta";
+      link.href = "/es/app.html";
+    }
+  } catch {}
+  // Currency: remembered only, since the site doesn't show prices yet.
+  const currency = document.getElementById("pref-currency");
+  try { const v = localStorage.getItem("merkats.currency"); if (v && [...currency.options].some((o) => o.value === v)) currency.value = v; } catch {}
+  currency.addEventListener("change", () => save("currency", currency.value));
+})();
+</script>
+</body>
+</html>
